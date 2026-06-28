@@ -182,7 +182,7 @@ export default function MapSidebar(props: MapSidebarProps) {
     onToggleDev,
   } = props;
 
-  const [open, setOpen] = useState<Section>("layers");
+  const [open, setOpen] = useState<Section>("eggs");
   const categoryById = new Map(data.categories.map((cat) => [cat.id, cat]));
   const markerByCategory: Record<string, string> = {
     perk: "P",
@@ -221,6 +221,20 @@ export default function MapSidebar(props: MapSidebarProps) {
           className="h-auto w-48 max-w-full"
         />
         <p className="text-xs text-zinc-500">Interactive Zombies Map</p>
+        <p className="mt-1 text-[10px] uppercase tracking-wide text-zinc-600">
+          {data.eggs.reduce((count, egg) => count + egg.stages.length, 0)} quest
+          sections /{" "}
+          {data.eggs.reduce(
+            (count, egg) =>
+              count +
+              egg.stages.reduce(
+                (stageCount, stage) => stageCount + stage.steps.length,
+                0,
+              ),
+            0,
+          )}{" "}
+          steps
+        </p>
       </div>
 
       {floors.length > 0 && (
@@ -419,6 +433,14 @@ export default function MapSidebar(props: MapSidebarProps) {
                   <span className="text-sm font-semibold text-white">
                     {egg.name}
                   </span>
+                  <span className="ml-auto text-[10px] font-medium uppercase text-zinc-600">
+                    {egg.stages.length} stages /{" "}
+                    {egg.stages.reduce(
+                      (count, stage) => count + stage.steps.length,
+                      0,
+                    )}{" "}
+                    steps
+                  </span>
                 </div>
 
                 <div className="space-y-1">
@@ -440,6 +462,9 @@ export default function MapSidebar(props: MapSidebarProps) {
                           </span>
                           <span className="font-medium">
                             Stage {si + 1}: {stage.title}
+                          </span>
+                          <span className="ml-auto shrink-0 text-[10px] text-zinc-500">
+                            {stage.steps.length}
                           </span>
                         </button>
 

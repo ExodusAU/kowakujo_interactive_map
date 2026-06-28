@@ -419,7 +419,7 @@ const InteractiveMap = forwardRef<MapStageHandle, InteractiveMapProps>(
                   onMarkerClick(m);
                 }}
                 // Image markers are the bare icon (no disc/ring); glyph markers
-                // keep the colored circle. Circles are reserved for guide nodes.
+                // keep the colored circle. Circles are reserved for quest nodes.
                 className={
                   hasIcon
                     ? "group absolute z-10 flex items-center justify-center transition-transform hover:z-20"

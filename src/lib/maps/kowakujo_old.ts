@@ -1,12 +1,8 @@
 import type { MapData } from "./types";
 
-// Expanded Kowakujo quest data. It preserves the current plotted data and adds
-// text-only/TODO locations where exact map positions or images still need to be
-// placed.
-
 // Image assets live under /public and are referenced by URL string:
 //   perk icons  → /public/images/perks/icons/<name>.webp   (marker icon)
-//   in-game pics → /public/images/perks/ingame/<name>.jpg  (reveal lightbox)
+//   in-game pics → /public/images/perks/ingame/<name>.png  (reveal lightbox)
 // Drop a file in the folder and point a marker at it — no imports needed.
 
 // ─────────────────────────────────────────────────────────────────────────
@@ -99,7 +95,7 @@ export const kowakujo: MapData = {
       label: "Pack-a-Punch",
       position: { x: 59.7, y: 7.9 },
       icon: "/images/perks/icons/packapunch.png",
-      revealImage: "/images/perks/ingame/perk_pack-a-punch.jpg",
+      revealImage: "/images/perks/ingame/packapunch.png",
     },
 
     // Perks. `icon` = icons/<name> (marker), `revealImage` = ingame/<name>.png.
@@ -110,7 +106,7 @@ export const kowakujo: MapData = {
       label: "Melee Macchiato",
       position: { x: 14.9, y: 56.4 },
       icon: "/images/perks/icons/meleemacchiato.webp",
-      revealImage: "/images/perks/ingame/perk_melee_macchiato.jpg",
+      revealImage: "/images/perks/ingame/meleemacchiato.png",
     },
     {
       id: "perk-elemental-pop",
@@ -119,7 +115,7 @@ export const kowakujo: MapData = {
       label: "Elemental Pop",
       position: { x: 56.2, y: 18.7 },
       icon: "/images/perks/icons/elementalpop.webp",
-      revealImage: "/images/perks/ingame/perk_elemental-pop.jpg",
+      revealImage: "/images/perks/ingame/elementalpop.png",
     },
     {
       id: "perk-mule-kick",
@@ -128,6 +124,7 @@ export const kowakujo: MapData = {
       label: "Mule Kick",
       position: { x: 47.8, y: 19.5 },
       icon: "/images/perks/icons/mulekick.webp",
+      revealImage: "/images/perks/ingame/mulekick.png",
     },
     {
       id: "perk-vulture-aid",
@@ -136,7 +133,7 @@ export const kowakujo: MapData = {
       label: "Vulture Aid",
       position: { x: 47.2, y: 9 },
       icon: "/images/perks/icons/vultureaid.webp",
-      revealImage: "/images/perks/ingame/perk_vulture-aid.jpg",
+      revealImage: "/images/perks/ingame/vultureaid.png",
     },
     {
       id: "perk-phd-flopper",
@@ -145,7 +142,7 @@ export const kowakujo: MapData = {
       label: "PHD Flopper",
       position: { x: 39.1, y: 33.3 },
       icon: "/images/perks/icons/phdflopper.webp",
-      revealImage: "/images/perks/ingame/perk_phd-flopper.jpg",
+      revealImage: "/images/perks/ingame/phdflopper.png",
     },
     {
       id: "perk-der-wunderfizz",
@@ -154,7 +151,7 @@ export const kowakujo: MapData = {
       label: "Der Wunderfizz",
       position: { x: 43.3, y: 36 },
       icon: "/images/perks/icons/derwunderfizz.png",
-      revealImage: "/images/perks/ingame/perk_der_wunderfizz.jpg",
+      revealImage: "/images/perks/ingame/derwunderfizz.png",
     },
     {
       id: "perk-juggernog",
@@ -163,7 +160,7 @@ export const kowakujo: MapData = {
       label: "Juggernog",
       position: { x: 56.4, y: 41.3 },
       icon: "/images/perks/icons/juggernog.webp",
-      revealImage: "/images/perks/ingame/perk_juggernog.jpg",
+      revealImage: "/images/perks/ingame/juggernog.png",
     },
     {
       id: "perk-death-perception",
@@ -172,7 +169,7 @@ export const kowakujo: MapData = {
       label: "Death Perception",
       position: { x: 28.4, y: 80.8 },
       icon: "/images/perks/icons/deathperception.webp",
-      revealImage: "/images/perks/ingame/perk_death_perception.jpg",
+      revealImage: "/images/perks/ingame/deathperception.png",
     },
     {
       id: "perk-stamin-up",
@@ -181,7 +178,7 @@ export const kowakujo: MapData = {
       label: "Stamin-Up",
       position: { x: 53.1, y: 76 },
       icon: "/images/perks/icons/staminup.webp",
-      revealImage: "/images/perks/ingame/perk_stamin-up.jpg",
+      revealImage: "/images/perks/ingame/staminup.png",
     },
     {
       id: "perk-quick-revive",
@@ -190,6 +187,7 @@ export const kowakujo: MapData = {
       label: "Quick Revive",
       position: { x: 57.7, y: 92.9 },
       icon: "/images/perks/icons/quickrevive.webp",
+      revealImage: "/images/perks/ingame/quickrevive.png",
     },
     {
       id: "perk-speed-cola",
@@ -198,7 +196,7 @@ export const kowakujo: MapData = {
       label: "Speed Cola",
       position: { x: 58, y: 67.2 },
       icon: "/images/perks/icons/speedcola.webp",
-      revealImage: "/images/perks/ingame/perk_speed-cola.jpg",
+      revealImage: "/images/perks/ingame/speedcola.png",
     },
     {
       id: "perk-wisp-tea",
@@ -207,6 +205,7 @@ export const kowakujo: MapData = {
       label: "Wisp Tea",
       position: { x: 79.7, y: 88.7 },
       icon: "/images/perks/icons/wisptea.webp",
+      revealImage: "/images/perks/ingame/wisptea.png",
     },
     {
       id: "perk-double-tap",
@@ -215,7 +214,7 @@ export const kowakujo: MapData = {
       label: "Double Tap",
       position: { x: 88.8, y: 53.1 },
       icon: "/images/perks/icons/doubletap.webp",
-      revealImage: "/images/perks/ingame/perk_double-tap.jpg",
+      revealImage: "/images/perks/ingame/doubletap.png",
     },
   ],
 
@@ -814,16 +813,6 @@ export const kowakujo: MapData = {
               ],
             },
             {
-              id: "s1-open-tenshu-gate",
-              title: "Open the Tenshu Entrance",
-              instruction:
-                "After both wards are recaptured, return to the Central Courtyard and interact with the door marked by two red Oni glyphs to open the Tenshu Entrance.",
-              icon: "/images/easteregg/star.svg",
-              iconPosition: { x: 52.5, y: 39.8 },
-              revealCaption:
-                "**Central Courtyard:** Once the Training Area and Kitchens wards are both recaptured, the gate with two red Oni glyphs becomes interactable.\n\nInteract with it to remove the glyphs and open the path into **Tenshu Entrance**.",
-            },
-            {
               id: "s1-hanko",
               title: "Acquire the Shogun's Hanko",
               instruction:
@@ -929,34 +918,6 @@ export const kowakujo: MapData = {
                 "**Workshop:** With all three parts collected, craft the **Maneki-Neko** on the worktable to the left of **Vulture Aid**.\n\nPick it up once crafting finishes.\n\n**Important:** The Maneki-Neko is tactical equipment used later. If you use it, you can recraft another one at this bench.",
             },
             {
-              id: "s2-upgrade-maneki-neko",
-              title: "Upgrade the Maneki-Neko",
-              instruction:
-                "Optional upgrade chain: use the Combat Bow with the Ghost Sniper trap targets, gather the powder and kitchen pickups, then upgrade the Maneki-Neko at the Workshop bench.",
-              icon: "/images/easteregg/craft.svg",
-              iconPosition: { x: 44.7, y: 9.3 },
-              revealCaption:
-                "Craft a **Combat Bow**, activate the **Ghost Sniper trap** at the big tree in front of the castle, then shoot the blue targets visible through the wall holes. Completing the target sequence drops **White Powder**.\n\nTODO: Confirm whether the **Matches/Cigarette Box** on the Kitchens bookshelf/barrels and the **coal** pickup on the stove are required.\n\nReturn to the **Workshop** crafting bench and hold interact to obtain the upgraded Maneki-Neko tactical.",
-              locations: [
-                {
-                  label: "1",
-                  text: "Craft a Combat Bow from a crafting table.",
-                },
-                {
-                  label: "2",
-                  text: "Activate the Ghost Sniper trap by the big tree in front of the castle, look through the wall holes, and shoot the blue targets with the Combat Bow until White Powder drops.",
-                },
-                {
-                  label: "3",
-                  text: "TODO: Confirm whether the Kitchens Matches/Cigarette Box and stove coal pickup are required.",
-                },
-                {
-                  label: "4",
-                  text: "Return to the Workshop bench and hold interact to craft the upgraded Maneki-Neko tactical. The Maneki-Neko can be crafted again at the table for 500 salvage.",
-                },
-              ],
-            },
-            {
               id: "s2-cage",
               title: "Get the Cage at the Castle",
               instruction:
@@ -983,8 +944,6 @@ export const kowakujo: MapData = {
               title: "Follow the Paw Prints",
               instruction:
                 "Follow and clear the paw-print trails in one of four locations: Training Area, Stables, Flower Garden, or Kitchens.",
-              revealCaption:
-                "After building the Maneki-Neko, one of four paw-print starts is chosen at random each match: **Stables**, **Flower Garden**, **Kitchens**, or **Training Area**.\n\nKill a zombie on the correct start location to reveal paw prints, follow the prints, then kill a zombie at the next indicated spot. Repeat until the prints form a circle, usually after seven advances.\n\nWhen the lava is raised in that area, throw the **Maneki-Neko** into the circle to spawn the Abomination. If the lava is solid, two explosives can break it.",
               // Each location is a trail with a glowing paw print at both ends.
               // Clicking the start end opens image 1; the far end opens image 2.
               locations: [
@@ -1228,16 +1187,6 @@ export const kowakujo: MapData = {
           title: "Collect the Evidences",
           steps: [
             {
-              id: "s5-evidence-board",
-              title: "Evidence Board Setup",
-              instruction:
-                "Use the Meditation Room shelves and evidence wall to place gathered notes and evidence items as each evidence box is completed.",
-              icon: "/images/easteregg/star.svg",
-              iconPosition: { x: 38.2, y: 20 },
-              revealCaption:
-                "**Meditation Room:** Use this room as the evidence hub. Place evidence items and notes on the shelves as you complete each chain.\n\nCompleting all evidence for a person gives an image that can be placed on the Meditation Room wall. Interacting with the board may trigger dialogue clues for the murder-solve steps.",
-            },
-            {
               id: "s5-suspect-evidences",
               title: "Suspect Evidences",
               instruction:
@@ -1256,9 +1205,9 @@ export const kowakujo: MapData = {
               // "Accomplice Evidences" has three sub-tasks (Merchant, Gardener,
               // TBD). Modeled as one step per accomplice for clean grouping.
               id: "s5-accomplice-merchant",
-              title: "Evidence Box 2: Coin Purse and Merchant",
+              title: "Accomplice Evidences: Merchant",
               instruction:
-                "Trigger the Coin Purse evidence cutscene, then spawn and defeat the Merchant for the Sales Note and Mercantile Abacus.",
+                "Track down the Merchant to collect the note and Mercantile Abacus. Select this step for the sub-steps.",
               solidMarkers: true,
               locations: [
                 {
@@ -1311,30 +1260,6 @@ export const kowakujo: MapData = {
                     "**Staging Area:** Lead the fruit-carrying zombie to the shack window and kill it there.\n\nIf done correctly, the **Merchant** spawns. Kill the Merchant to collect the note and **Mercantile Abacus**.",
                   position: { x: 47.9, y: 69.7 },
                   revealImages: ["/images/easteregg/stage_05/stage_05_step_02_merch_05_a.jpg", "/images/easteregg/stage_05/stage_05_step_02_merch_05_b.jpg", "/images/easteregg/stage_05/stage_05_step_02_merch_05_c.jpg", "/images/easteregg/stage_05/stage_05_step_02_merch_05_d.jpg"],
-                },
-              ],
-            },
-            {
-              id: "s5-accomplice-noble",
-              title: "Evidence Box 2: Noble's Hat",
-              instruction:
-                "Use Decoys at the Training Area wooden windows, throw the Noble's grenades back, then collect the note and Noble's Hat.",
-              solidMarkers: true,
-              locations: [
-                {
-                  label: "1",
-                  text: "Buy Decoys from a crafting station, then go to the Training Area near the blown-out wall and wooden windows.",
-                  position: { x: 18.8, y: 60.7 },
-                },
-                {
-                  label: "2",
-                  text: "Throw a Decoy at each wooden window. The windows open and the Noble Zombie throws grenades down.",
-                  position: { x: 18.8, y: 60.7 },
-                },
-                {
-                  label: "3",
-                  text: "Throw the grenades back into the windows to kill the Noble Zombie. Once dead, collect the note and the Noble's Hat evidence item.",
-                  position: { x: 18.8, y: 60.7 },
                 },
               ],
             },
@@ -1416,16 +1341,6 @@ export const kowakujo: MapData = {
               ],
             },
             {
-              id: "s5-poison-note",
-              title: "Evidence Box 3: Toxin Timing Note",
-              instruction:
-                "Pick up the note left of the War Room stairs; it appears to affect the poison timing used later in the murder solve.",
-              icon: "/images/easteregg/star.svg",
-              iconPosition: { x: 51, y: 10 },
-              revealCaption:
-                "**War Room:** Pick up the note to the left of the stairs. It appears to provide or affect the toxin timing used later.\n\nKnown timing patterns include **2 3 2**, **1 2 1**, and **3 4 2**.\n\nTODO: Verify match-by-match timing behavior.",
-            },
-            {
               id: "s5-poison-monkshood",
               title: "Poison Evidences: Monkshood Flower",
               instruction:
@@ -1503,40 +1418,6 @@ export const kowakujo: MapData = {
               ],
             },
             {
-              id: "s5-poison-pestle-pufferfish",
-              title: "Evidence Box 3: Pestle and Pufferfish",
-              instruction:
-                "Solve the Storage Rooms 3x3 scroll grid for the Pestle and note, then fill the Kitchens bowl soul box to reveal the Pufferfish.",
-              solidMarkers: true,
-              locations: [
-                {
-                  label: "1",
-                  text: "In the Storage Rooms, find the 3x3 grid filled with papers/sticks and melee it to start the timed Cat Doll puzzle.",
-                  position: { x: 42.9, y: 25 },
-                },
-                {
-                  label: "2",
-                  text: "Melee scrolls to push one scroll in and adjacent scrolls out until all scrolls are inside the grid. TODO: Add solver link or solver logic.",
-                  position: { x: 42.9, y: 25 },
-                },
-                {
-                  label: "3",
-                  text: "When complete, the Pestle and a note pop out of the middle of the 3x3 grid.",
-                  position: { x: 42.9, y: 25 },
-                },
-                {
-                  label: "4",
-                  text: "Go to the Kitchens and interact with the bowl on the stone slab in the center of the room.",
-                  position: { x: 78.9, y: 52.2 },
-                },
-                {
-                  label: "5",
-                  text: "Fill the bowl as a soul box. Use Brain Rot kills or Nekomancer charged attacks. Once complete, a ghost cutscene plays and the Pufferfish appears in the corner.",
-                  position: { x: 78.9, y: 52.2 },
-                },
-              ],
-            },
-            {
               id: "s5-motive-evidences",
               title: "Motive Evidences",
               instruction:
@@ -1560,443 +1441,6 @@ export const kowakujo: MapData = {
                   revealImages: ["/images/easteregg/stage_05/stage_05_step_05_brothers_01_a.jpg", "/images/easteregg/stage_05/stage_05_step_05_brothers_01_b.jpg", "/images/easteregg/stage_05/stage_05_step_05_brothers_01_c.jpg"],
                 },
               ],
-            },
-            {
-              id: "s5-crest-medallion",
-              title: "Evidence Box 5: Clock and Crest Medallion",
-              instruction:
-                "After Evidence Box 4 reveals the fourth image, solve the Storage Rooms clock and Staging Area flag puzzle to collect the Crest Medallion.",
-              solidMarkers: true,
-              locations: [
-                {
-                  label: "1",
-                  text: "After completing Evidence Box 4, find the clock revealed in rubble in the Storage Rooms. Interact with it and write down the four numbers in exact order.",
-                  position: { x: 41, y: 35.1 },
-                },
-                {
-                  label: "2",
-                  text: "Find the blue glowing numbers on walls in Spawn, Stables, Flower Garden, and Central Courtyard. Each location has one number and its order marker.",
-                  positions: [
-                    { x: 52.5, y: 95.4 },
-                    { x: 36, y: 76 },
-                    { x: 81.4, y: 76.9 },
-                    { x: 52.5, y: 48.7 },
-                  ],
-                  positionLabels: ["Spawn", "Stables", "Garden", "Courtyard"],
-                },
-                {
-                  label: "3",
-                  text: "End the round to start a defense round. Kill the red-glowing zombies carrying flags.",
-                  position: { x: 47.9, y: 69.7 },
-                },
-                {
-                  label: "4",
-                  text: "When the round ends, all flags are placed in the Staging Area. Put up to two flags under each blue glowing number so the flag values add up to the corresponding clock number.",
-                  position: { x: 47.9, y: 69.7 },
-                },
-                {
-                  label: "5",
-                  text: "Return to the Storage Rooms clock and open it to collect the Crest Medallion.",
-                  position: { x: 41, y: 35.1 },
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: "stage-6",
-          title: "Evidence Box 4: Sake Cup",
-          steps: [
-            {
-              id: "s6-repair-sake-cup",
-              title: "Repair the Sake Cup",
-              instruction:
-                "After the toxins, use the Ceramic Shard chain and Tea Garden Kintsugi Station to repair the Sake Cup.",
-              solidMarkers: true,
-              locations: [
-                {
-                  label: "1",
-                  text: "After completing the toxins, the third painting appears in the Meditation Room with a Ceramic Shard.",
-                  position: { x: 38.2, y: 20 },
-                },
-                {
-                  label: "2",
-                  text: "Pick up the additional Ceramic Shard in the War Room left of the stairs to Shogun's Sanctum. This shard can be collected early.",
-                  position: { x: 51, y: 10 },
-                  revealImages: [
-                    "/images/easteregg/stage_04/stage_04_step_03_a.jpg",
-                    "/images/easteregg/stage_04/stage_04_step_03_b.jpg",
-                  ],
-                },
-                {
-                  label: "3",
-                  text: "Take the shard to the Kintsugi Station in the Tea Garden and craft/repair the Sake Cup.",
-                  position: { x: 34.7, y: 55.1 },
-                },
-                {
-                  label: "4",
-                  text: "End the round. When the Sake Cup glows blue, interact with it to trigger the Onryo ghost cutscene.",
-                  position: { x: 34.7, y: 55.1 },
-                },
-              ],
-            },
-            {
-              id: "s6-sake-cup-evidences",
-              title: "Horse, Brush, and Tea Whisk",
-              instruction:
-                "Use the repaired Sake Cup at three defense/cutscene locations to collect the Horse Statuette, Painter's Brush, and Tea Whisk.",
-              solidMarkers: true,
-              locations: [
-                {
-                  label: "1",
-                  text: "War Room: place the Sake Cup in the back-left corner and defend it while it pulses. Pick the cup back up and collect the Horse Statuette nearby.",
-                  position: { x: 53.2, y: 14.2 },
-                },
-                {
-                  label: "2",
-                  text: "Study/Collapsed Study: place the Sake Cup to the left of the Wunderfizz machine and repeat the defense to collect the Painter's Brush.",
-                  position: { x: 43.3, y: 36 },
-                },
-                {
-                  label: "3",
-                  text: "Tea Garden: return to the Kintsugi Station/Northeast corner for the final defense. A dog steals the Tea Whisk; chase it down and collect it.",
-                  position: { x: 34.7, y: 55.1 },
-                },
-                {
-                  label: "4",
-                  text: "Place the Evidence Box 4 items in the Meditation Room to reveal the fourth image.",
-                  position: { x: 38.2, y: 20 },
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: "stage-7",
-          title: "Solve the Murder",
-          steps: [
-            {
-              id: "s7-place-known-evidence",
-              title: "Place Known Evidence",
-              instruction:
-                "Place the fixed evidence items under the correct paintings in the Meditation Room.",
-              icon: "/images/easteregg/star.svg",
-              iconPosition: { x: 38.2, y: 20 },
-              revealCaption:
-                "**Meditation Room:** These placements do not change:\n\n- Place the **Comb** beneath the first painting.\n- Place the **Crest Medallion** beneath the fifth painting.\n\nThe remaining placements depend on notes, toxin timing, the fourth image, and the trap-accomplice clue.",
-            },
-            {
-              id: "s7-solve-toxin-time",
-              title: "Solve Toxin and Time",
-              instruction:
-                "Use the Doctor's Record and Toxin Note to place the toxin and set the Zodiac Dial.",
-              solidMarkers: true,
-              locations: [
-                {
-                  label: "1",
-                  text: "Use the Doctor's Record Note to identify the cause-of-death symptom, then use the Toxin Note to match that symptom to the correct toxin.",
-                  position: { x: 38.2, y: 20 },
-                },
-                {
-                  label: "2",
-                  text: "Pick up the matching toxin from the shelf and place it in front of the third painting.",
-                  position: { x: 38.2, y: 20 },
-                },
-                {
-                  label: "3",
-                  text: "Use the Toxin Note for poison time-to-effect and the Doctor's Record for time of death. Set the Zodiac Dial to time of death minus poison time. The dial works like a 12-hour analog clock with one hour per division.",
-                  position: { x: 38.2, y: 20 },
-                },
-              ],
-            },
-            {
-              id: "s7-fourth-image-and-accomplice",
-              title: "Fourth Image and Accomplice",
-              instruction:
-                "Use the fourth image and trap-kill ghost clue to place the final evidence items.",
-              solidMarkers: true,
-              locations: [
-                {
-                  label: "1",
-                  text: "For the fourth slot, use what appears in the fourth image: fish = Tea Whisk, mountains = Horse Statuette, bird = Painter's Brush.",
-                  position: { x: 38.2, y: 20 },
-                },
-                {
-                  label: "2",
-                  text: "Activate traps and get trap kills until a ghost soldier spawns and reveals the accomplice. Place that accomplice's respective item beneath the second painting.",
-                  position: { x: 52.5, y: 48.7 },
-                },
-              ],
-            },
-            {
-              id: "s7-submit-case",
-              title: "Submit the Case",
-              instruction:
-                "Interact with the incense in the Meditation Room to test the case solution.",
-              icon: "/images/easteregg/star.svg",
-              iconPosition: { x: 38.2, y: 20 },
-              revealCaption:
-                "**Meditation Room:** Interact with the incense on the sides of the room to present the solution.\n\nWrong evidence spawns enemies and requires a new round to retry. If completed first try, the **Path of Sorrows** ultra-rarity katana appears stuck in the World Seed room after the mini-boss sequence.",
-            },
-          ],
-        },
-        {
-          id: "stage-8",
-          title: "Purify the Sword and Boss Access",
-          steps: [
-            {
-              id: "s8-purify-sword",
-              title: "Purify the Sword",
-              instruction:
-                "After the case is solved, follow the orange orb to the World Seed and purify the sword stuck in the seed.",
-              icon: "/images/easteregg/star.svg",
-              iconPosition: { x: 58.7, y: 8.2 },
-              revealCaption:
-                "Once the murder solution is accepted, a bright orange orb floats to the **World Seed**.\n\nReturn to the World Seed room and purify the sword stuck in the seed.",
-            },
-            {
-              id: "s8-mini-boss",
-              title: "Mini-Boss Arena",
-              instruction:
-                "Purifying the sword teleports the team to a mini-boss arena. Defeat the mini-boss to return to the World Seed room.",
-              revealCaption:
-                "TODO: Add mini-boss arena details.\n\nAfter the mini-boss dies, you return to the World Seed room and receive a dragon cutscene.",
-            },
-            {
-              id: "s8-boss-fast-travel",
-              title: "Boss Arena Fast Travel",
-              instruction:
-                "After the dragon cutscene, use the Fast Travel Flag that appears in the World Seed room to travel to the boss arena.",
-              icon: "/images/easteregg/dragonicon.png",
-              iconPosition: { x: 58.7, y: 8.2 },
-              revealCaption:
-                "After the dragon cutscene, a **Fast Travel Flag** appears in the World Seed room. Use it when ready to enter the boss arena.",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: "side-easter-eggs",
-      name: "Side Easter Eggs",
-      color: "#22c55e",
-      stages: [
-        {
-          id: "side-music",
-          title: "Mr Peeks Music",
-          steps: [
-            {
-              id: "side-music-headphones",
-              title: "Headphone Locations",
-              instruction:
-                "Find and interact with the Mr Peeks headphone locations to trigger the music Easter egg.",
-              revealCaption:
-                "TODO",
-            },
-          ],
-        },
-        {
-          id: "side-takeo-flashback",
-          title: "Takeo Flashback",
-          steps: [
-            {
-              id: "side-takeo-start",
-              title: "Start Takeo Flashback",
-              instruction:
-                "You must be playing as Takeo. Craft a Psych Grenade, go to the War Room, and throw it at yourself near the bottom of the stairs.",
-              solidMarkers: true,
-              locations: [
-                {
-                  label: "1",
-                  text: "Play as Takeo and craft a Psych Grenade.",
-                },
-                {
-                  label: "2",
-                  text: "Go to the War Room and throw the Psych Grenade at yourself near the bottom of the stairs.",
-                  position: { x: 53.2, y: 14.2 },
-                },
-                {
-                  label: "3",
-                  text: "A version of Takeo appears. Interact with him; he disappears and drops a katana on the floor.",
-                  position: { x: 53.2, y: 14.2 },
-                },
-                {
-                  label: "4",
-                  text: "Interact with the katana to pick it up and start the Flashback Easter egg.",
-                  position: { x: 53.2, y: 14.2 },
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: "side-parkour",
-          title: "Parkour",
-          steps: [
-            {
-              id: "side-parkour-course",
-              title: "Lava Rock Parkour Course",
-              instruction:
-                "Wait near Melee Macchiato for a floating lava rock, ride it to the house on the lava lake, then look back to reveal the parkour course.",
-              solidMarkers: true,
-              locations: [
-                {
-                  label: "1",
-                  text: "Wait near Melee Macchiato until a floating rock appears on the lava.",
-                  position: { x: 14.9, y: 56.4 },
-                },
-                {
-                  label: "2",
-                  text: "Jump onto the rock and wait for it to carry you to a house on the lava lake.",
-                  position: { x: 14.9, y: 56.4 },
-                },
-                {
-                  label: "3",
-                  text: "Jump onto the house and look back to see the parkour course.",
-                  position: { x: 14.9, y: 56.4 },
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: "side-cat",
-          title: "Cat Easter Egg",
-          steps: [
-            {
-              id: "side-cat-placeholder",
-              title: "Cat Easter Egg",
-              instruction:
-                "TODO",
-              revealCaption:
-                "TODO",
-            },
-          ],
-        },
-        {
-          id: "side-klaus-mech",
-          title: "Klaus Mech",
-          steps: [
-            {
-              id: "side-klaus-build",
-              title: "Build or Repair Klaus",
-              instruction:
-                "Shoot floating rocks in the Flower Garden lava to drop Klaus parts, then repair Klaus when the body appears.",
-              solidMarkers: true,
-              locations: [
-                {
-                  label: "1",
-                  text: "Go to the Flower Garden and shoot the floating rocks inside the lava.",
-                  position: { x: 81.4, y: 76.9 },
-                },
-                {
-                  label: "2",
-                  text: "Shooting rocks can drop a Klaus Arm. Shoot multiple rocks until Klaus' body appears.",
-                  position: { x: 81.4, y: 76.9 },
-                },
-                {
-                  label: "3",
-                  text: "TODO",
-                  position: { x: 81.4, y: 76.9 },
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: "side-gatcha-machine",
-          title: "Gatcha Machine Charm",
-          steps: [
-            {
-              id: "side-gatcha-unlock",
-              title: "Unlock Gatcha Machine",
-              instruction:
-                "Use Flower Power Overheal during an active smoky Fissure to reveal a Gatcha Machine, then melee it and jump on the orbs to make it permanent.",
-              solidMarkers: true,
-              locations: [
-                {
-                  label: "1",
-                  text: "Known machine location: Kitchens. TODO: Add additional Gatcha Machine locations.",
-                  position: { x: 78.9, y: 52.2 },
-                },
-                {
-                  label: "2",
-                  text: "Get the Flower Power Overheal effect.",
-                },
-                {
-                  label: "3",
-                  text: "Go to the Kitchen while a smoky Fissure is active. The Gatcha Machine appears while you have Overheal.",
-                  position: { x: 78.9, y: 52.2 },
-                },
-                {
-                  label: "4",
-                  text: "Melee the machine, then jump on the orbs that appear on the ground. This makes the machine stay permanently.",
-                  position: { x: 78.9, y: 52.2 },
-                },
-                {
-                  label: "5",
-                  text: "Pay 500 salvage for a charm. There are five charms, duplicates are possible, and this may remove Pack-a-Punch ability.",
-                  position: { x: 78.9, y: 52.2 },
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: "power-up-locations",
-      name: "Power-Up Locations",
-      color: "#00ffff",
-      stages: [
-        {
-          id: "power-ups",
-          title: "Power-Up Drops",
-          steps: [
-            {
-              id: "power-up-bonus-points",
-              title: "Bonus Points",
-              instruction: "TODO",
-            },
-            {
-              id: "power-up-double-points",
-              title: "Double Points",
-              instruction: "TODO",
-            },
-            {
-              id: "power-up-nuke",
-              title: "Nuke",
-              instruction: "TODO",
-            },
-            {
-              id: "power-up-full-power",
-              title: "Full Power",
-              instruction: "TODO",
-            },
-            {
-              id: "power-up-max-armor",
-              title: "Max Armor",
-              instruction: "TODO",
-            },
-            {
-              id: "power-up-insta-kill",
-              title: "Insta Kill",
-              instruction: "TODO",
-            },
-            {
-              id: "power-up-max-ammo",
-              title: "Max Ammo",
-              instruction: "TODO",
-            },
-            {
-              id: "power-up-fire-sale",
-              title: "Fire Sale",
-              instruction: "TODO",
-            },
-            {
-              id: "power-up-random-perk",
-              title: "Random Perk",
-              instruction: "TODO",
             },
           ],
         },
