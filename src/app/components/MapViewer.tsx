@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import type { EggStep, MapData, MapMarker, MapPoint } from "@/lib/maps/types";
+import { stepColorFor } from "@/lib/maps/stepColors";
 import InteractiveMap, { type MapStageHandle } from "./InteractiveMap";
 import MapSidebar from "./MapSidebar";
 import RevealModal, { type RevealContent } from "./RevealModal";
@@ -29,23 +30,25 @@ function unitTitle(u: RevealUnit): string {
   return `${u.step.title} — ${loc?.label ?? u.locationIndex + 1}`;
 }
 
-/** Find a selected egg step (and its egg) anywhere in the data. */
+/** Find a selected egg step (with its egg and stage index) anywhere in the data. */
 function findStep(data: MapData, stepId: string | null) {
   if (!stepId) return null;
   for (const egg of data.eggs)
-    for (const stage of egg.stages)
-      for (const step of stage.steps)
-        if (step.id === stepId) return { egg, step };
+    for (const stage of egg.stages) {
+      const stepIndex = stage.steps.findIndex((s) => s.id === stepId);
+      if (stepIndex !== -1)
+        return { egg, step: stage.steps[stepIndex], stepIndex };
+    }
   return null;
 }
 
-/** All steps (with their egg) belonging to a stage. */
+/** All steps (with their egg and stage index) belonging to a stage. */
 function stepsForStage(data: MapData, stageId: string | null) {
   if (!stageId) return [];
   for (const egg of data.eggs)
     for (const stage of egg.stages)
       if (stage.id === stageId)
-        return stage.steps.map((step) => ({ egg, step }));
+        return stage.steps.map((step, stepIndex) => ({ egg, step, stepIndex }));
   return [];
 }
 
@@ -219,8 +222,8 @@ export default function MapViewer({ data }: MapViewerProps) {
       : []
     : stepsForStage(data, expandedStageId);
 
-  const eggRoutes = activeStepEntries.map(({ egg, step }) => {
-    const stepColor = step.color ?? egg.color;
+  const eggRoutes = activeStepEntries.map(({ step, stepIndex }) => {
+    const stepColor = stepColorFor(step, stepIndex);
     return {
       id: step.id,
       points: step.path ?? [],

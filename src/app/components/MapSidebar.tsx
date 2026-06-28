@@ -3,6 +3,7 @@
 import { type ReactNode, useState } from "react";
 import Image from "next/image";
 import type { EggStep, Floor, MapData } from "@/lib/maps/types";
+import { stepColorFor } from "@/lib/maps/stepColors";
 
 interface MapSidebarProps {
   data: MapData;
@@ -477,20 +478,28 @@ export default function MapSidebar(props: MapSidebarProps) {
                             </li>
                             {stage.steps.map((step, idx) => {
                               const active = selectedStepId === step.id;
+                              const stepColor = stepColorFor(step, idx);
                               return (
                                 <li key={step.id}>
                                   <button
                                     type="button"
                                     onClick={() => onSelectStep(step)}
                                     className={`flex w-full items-start gap-3 rounded-md p-2 text-left transition-colors ${
-                                      active
-                                        ? "bg-pink-500/15 ring-1 ring-pink-500/40"
-                                        : "hover:bg-white/5"
+                                      active ? "ring-1" : "hover:bg-white/5"
                                     }`}
+                                    style={
+                                      active
+                                        ? {
+                                            background: `${stepColor}26`,
+                                            // ring color (Tailwind reads this var)
+                                            ["--tw-ring-color" as string]: `${stepColor}66`,
+                                          }
+                                        : undefined
+                                    }
                                   >
                                     <span
                                       className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 border-white text-xs font-bold text-white"
-                                      style={{ background: egg.color }}
+                                      style={{ background: stepColor }}
                                     >
                                       {idx + 1}
                                     </span>
@@ -502,7 +511,10 @@ export default function MapSidebar(props: MapSidebarProps) {
                                         {step.instruction}
                                       </span>
                                       {active && (
-                                        <span className="mt-1 block text-[11px] font-medium text-pink-400">
+                                        <span
+                                          className="mt-1 block text-[11px] font-medium"
+                                          style={{ color: stepColor }}
+                                        >
                                           {step.path
                                             ? "Route shown - click the map icon for details ->"
                                             : step.locations?.length
@@ -536,7 +548,8 @@ export default function MapSidebar(props: MapSidebarProps) {
                                                     onClick={() =>
                                                       onViewLocation(step.id, li)
                                                     }
-                                                    className="font-medium text-pink-400 hover:underline"
+                                                    className="font-medium hover:underline"
+                                                    style={{ color: stepColor }}
                                                   >
                                                     View {"->"}
                                                   </button>
