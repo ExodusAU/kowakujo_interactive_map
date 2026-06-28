@@ -784,7 +784,7 @@ export const kowakujo: MapData = {
               instruction:
                 "Recapture the Ward in the Kitchens by standing next to the dragon banner while fending off zombies.",
               icon: "/images/easteregg/dragonicon.png",
-              revealImage: "/images/easteregg/stage-1/step1.jpg",
+              revealImages: ["/images/easteregg/stage_01/stage_01_step_01_a.jpg", "/images/easteregg/stage_01/stage_01_step_01_b.jpg"],
               // Route: spawn → … → dragon banner in the Kitchens (last point).
               path: [
                 { x: 52.4, y: 94.5 },
@@ -802,7 +802,7 @@ export const kowakujo: MapData = {
               instruction:
                 "Recapture the Ward in the Training Area by standing next to the dragon banner while fending off zombies.",
               icon: "/images/easteregg/dragonicon.png",
-              revealImage: "/images/easteregg/stage-1/step2.jpg",
+              revealImages: ["/images/easteregg/stage_01/stage_01_step_02_a.jpg", "/images/easteregg/stage_01/stage_01_step_02_b.jpg"],
               path: [
                 { x: 74.3, y: 52 },
                 { x: 66, y: 55 },
@@ -818,7 +818,7 @@ export const kowakujo: MapData = {
               instruction:
                 "Defeat the Oni in the War Room and collect Shogun's Hanko.",
               icon: "/images/easteregg/star.svg",
-              revealImage: "/images/easteregg/stage-1/step3.jpg",
+              revealImages: ["/images/easteregg/stage_01/stage_01_step_03_a.jpg", "/images/easteregg/stage_01/stage_01_step_03_b.jpg", "/images/easteregg/stage_01/stage_01_step_03_c.jpg", "/images/easteregg/stage_01/stage_01_step_03_d.jpg"],
               revealCaption:
                 "**Route:** On the way to the **War Room**, detour through **PHD Flopper**; you will need it later.\n\n**Fight:** Enter the **War Room** and defeat the armoured zombies and the Oni.\n\n**Finish:** The Oni drops **Shogun's Hanko**. Collect it, then open the door to the **Shogun's Sanctum**.",
               path: [
@@ -833,12 +833,21 @@ export const kowakujo: MapData = {
               ],
             },
             {
+              id: "s1-ceramic-shard",
+              title: "Broken Ceramic Shard",
+              instruction:
+                "Find the ceramic shard near the pool of blood by the Pack-a-Punch stairs.",
+              icon: "/images/easteregg/star.svg",
+              iconPosition: { x: 49.7, y: 7.6 },
+              revealImages: ["/images/easteregg/stage_04/stage_04_step_03_a.jpg", "/images/easteregg/stage_04/stage_04_step_03_b.jpg"],
+            },
+            {
               id: "s1-unlock-pap",
               title: "Unlock Pack-a-Punch",
               instruction:
                 "Defeat zombies around the world seed to unlock Pack-a-Punch.",
               icon: "/images/easteregg/star.svg",
-              revealImage: "/images/easteregg/stage-1/step4.jpg",
+              revealImages: ["/images/easteregg/stage_01/stage_01_step_04_a.jpg", "/images/easteregg/stage_01/stage_01_step_04_b.jpg", "/images/easteregg/stage_01/stage_01_step_04_c.jpg"],
               revealCaption:
                 "**World Seed:** Walk up the stairs to the seed beside **Pack-a-Punch**.\n\nLure zombies close enough that they glow purple, then kill them near the seed to charge it. When the charge is complete, **Pack-a-Punch** unlocks.",
               path: [
@@ -858,17 +867,20 @@ export const kowakujo: MapData = {
               instruction:
                 "Find the Furin (Bell) in one of three locations: Staging Area, Stables, or Training Area.",
               locations: [
-                { 
+                {
+                  text: "Training Area",
                   position: { x: 18.6, y: 66.7 },
-                  revealImage: "/images/easteregg/stage-2/step1-loc1.jpg", 
+                  revealImage: "/images/easteregg/stage_02/stage_02_step_01_loc_01.jpg",
                 },
-                { 
-                  position: { x: 36.6, y: 70.4 }, 
-                  revealImage: "/images/easteregg/stage-2/step1-loc2.jpg", 
+                {
+                  text: "Stables",
+                  position: { x: 36.6, y: 70.4 },
+                  revealImage: "/images/easteregg/stage_02/stage_02_step_01_loc_02.jpg",
                 },
-                { 
-                  position: { x: 49.4, y: 82.2 }, 
-                  revealImage: "/images/easteregg/stage-2/step1-loc3.jpg", 
+                {
+                  text: "Staging Area",
+                  position: { x: 49.4, y: 82.2 },
+                  revealImage: "/images/easteregg/stage_02/stage_02_step_01_loc_03.jpg",
                 },
               ],
             },
@@ -878,9 +890,9 @@ export const kowakujo: MapData = {
               instruction:
                 "Find the Maneki-Neko (Cat Statue) in one of three marked spots in the Gatehouse or Kitchens.",
               locations: [
-                { position: { x: 60.5, y: 70.2 }, revealImage: "/images/easteregg/stage-2/step2-loc1.jpg" },
-                { position: { x: 74, y: 49.5 }, revealImage: "/images/easteregg/stage-2/step2-loc2.jpg" },
-                { position: { x: 87.4, y: 54.9 }, revealImage: "/images/easteregg/stage-2/step2-loc3.jpg" },
+                { position: { x: 60.5, y: 70.2 }, revealImages: ["/images/easteregg/stage_02/stage_02_step_02_loc_01_a.jpg", "/images/easteregg/stage_02/stage_02_step_02_loc_01_b.jpg"] },
+                { position: { x: 74, y: 49.5 }, revealImages: ["/images/easteregg/stage_02/stage_02_step_02_loc_02_a.jpg"] },
+                { position: { x: 87.4, y: 54.9 }, revealImages: ["/images/easteregg/stage_02/stage_02_step_02_loc_03_a.jpg"] },
               ],
             },
             {
@@ -889,9 +901,9 @@ export const kowakujo: MapData = {
               instruction:
                 "Find the Karakuri (Doll) in one of the marked Storage Rooms or Workshop spots.",
               locations: [
-                { position: { x: 35.8, y: 14.4 }, revealImage: "/images/easteregg/stage-2/step3-loc1.jpg" },
-                { position: { x: 43.6, y: 19.9 }, revealImage: "/images/easteregg/stage-2/step3-loc2.jpg" },
-                { position: { x: 45.6, y: 29.6 }, revealImage: "/images/easteregg/stage-2/step3-loc3.jpg" },
+                { position: { x: 35.8, y: 14.4 }, revealImage: "/images/easteregg/stage_02/stage_02_step_03_loc_01.jpg" },
+                { position: { x: 43.6, y: 19.9 }, revealImage: "/images/easteregg/stage_02/stage_02_step_03_loc_02.jpg" },
+                { position: { x: 45.6, y: 29.6 }, revealImage: "/images/easteregg/stage_02/stage_02_step_03_loc_03.jpg" },
               ],
             },
             {
@@ -901,9 +913,9 @@ export const kowakujo: MapData = {
                 "Craft the Maneki-Neko on the worktable in the Workshop.",
               icon: "/images/easteregg/craft.svg",
               iconPosition: { x: 44.7, y: 9.3 },
-              revealImage: "/images/easteregg/stage-2/step4.jpg",
+              revealImage: "/images/easteregg/stage_02/stage_02_step_04.jpg",
               revealCaption:
-                "**Workshop:** With all three parts collected, craft the **Maneki-Neko** on the worktable to the left of **Vulture Aid**.\n\nPick it up once crafting finishes.\n\n**Important:** The Maneki-Neko is tactical equipment used later. Do not throw it away unless the step calls for it.",
+                "**Workshop:** With all three parts collected, craft the **Maneki-Neko** on the worktable to the left of **Vulture Aid**.\n\nPick it up once crafting finishes.\n\n**Important:** The Maneki-Neko is tactical equipment used later. If you use it, you can recraft another one at this bench.",
             },
             {
               id: "s2-cage",
@@ -911,7 +923,7 @@ export const kowakujo: MapData = {
               instruction:
                 "Drop the cage from the Tenshu Eaves using PHD Flopper, then collect it.",
               icon: "/images/easteregg/star.svg",
-              revealImage: "/images/easteregg/stage-2/step5.jpg",
+              revealImages: ["/images/easteregg/stage_02/stage_02_step_05_a.jpg", "/images/easteregg/stage_02/stage_02_step_05_b.jpg"],
               iconPosition: { x: 45.5, y: 23.9 },
               revealCaption:
                 "**Tenshu Entrance:** Find the cage near the cherry blossom tree.\n\nGet **PHD Flopper** from the **Storage Rooms**, then dolphin-dive under the cage so the landing explosion knocks it down. Collect the cage after it drops.",
@@ -923,7 +935,7 @@ export const kowakujo: MapData = {
                 "Once you have the cage, throw it into lava to free the cat.",
               icon: "/images/easteregg/flame.svg",
               iconPosition: { x: 18.3, y: 55.3 },
-              revealImage: "/images/easteregg/stage-2/step6.jpg",
+              revealImage: "/images/easteregg/stage_02/stage_02_step_06.jpg",
               revealCaption:
                 "Pick up the cage and throw it into any body of **lava** to destroy the cage and free the cat.\n\n**Note:** Some lava can harden temporarily, but the outer lava areas never fully seal and can always be used.",
             },
@@ -945,14 +957,14 @@ export const kowakujo: MapData = {
                     { x: 82, y: 52.1 },
                   ],
                   // Trail start only; the end is Step 8's skull (combined there).
-                  revealImage: "/images/easteregg/stage-2/step7-loc1-start.jpg",
+                  //revealImage: "/images/easteregg/stage-2/step7-loc1-start.jpg",
                 },
                 {
                   label: "2",
                   color: "#fb923c",
                   icon: "/images/easteregg/paw.svg",
                   path: [{ x: 83.6, y: 69 }],
-                  revealImage: "/images/easteregg/stage-2/step7-loc2-start.jpg",
+                  //revealImage: "/images/easteregg/stage-2/step7-loc2-start.jpg",
                 },
                 {
                   label: "3",
@@ -965,7 +977,7 @@ export const kowakujo: MapData = {
                     { x: 33.2, y: 80.6 },
                     { x: 31.9, y: 76.1 },
                   ],
-                  revealImage: "/images/easteregg/stage-2/step7-loc3-start.jpg",
+                  //revealImage: "/images/easteregg/stage-2/step7-loc3-start.jpg",
                 },
                 {
                   label: "4",
@@ -975,7 +987,7 @@ export const kowakujo: MapData = {
                     { x: 23.8, y: 71.5 },
                     { x: 14.6, y: 62.3 },
                   ],
-                  revealImage: "/images/easteregg/stage-2/step7-loc4-start.jpg",
+                  revealImages: ["/images/easteregg/stage_02/stage_02_step_07_loc_04_start_a.jpg", "/images/easteregg/stage_02/stage_02_step_07_loc_04_start_b.jpg"],
                 },
               ],
             },
@@ -983,7 +995,7 @@ export const kowakujo: MapData = {
               id: "s2-abomination",
               title: "Kill the Abomination",
               instruction:
-                "Throw the Maneki-Neko at the end of your paw-print trail to spawn the Abomination, then defeat it to free the cat. The game assigns one of the four trails at random each match.",
+                "Throw the Maneki-Neko at the end of your paw-print trail into the center of the converging paws to spawn the Abomination, then defeat it to free the cat. The game assigns one of the four trails at random each match.",
               // One skull per Step 7 trail END (you only get one per game). Each
               // reveal combines that trail's end shot with the Abomination shot.
               locations: [
@@ -992,10 +1004,14 @@ export const kowakujo: MapData = {
                   color: "#ef4444",
                   icon: "/images/easteregg/skull.svg",
                   position: { x: 82, y: 52.1 },
-                  revealImages: [
-                    "/images/easteregg/stage-2/step7-loc1-end.jpg",
-                    "/images/easteregg/stage-2/step8.jpg",
-                  ],
+                  /* revealImages: [
+                   "/images/easteregg/stage_02/stage_02_step_08_loc_04_end_a.jpg",
+                    "/images/easteregg/stage_02/stage_02_step_08_loc_04_end_b.jpg",
+                    "/images/easteregg/stage_02/stage_02_step_08_loc_04_end_c.jpg",
+                    "/images/easteregg/stage_02/stage_02_step_08_loc_04_end_d.jpg",
+                    "/images/easteregg/stage_02/stage_02_step_08_loc_04_end_e.jpg",
+                    "/images/easteregg/stage_02/stage_02_step_08_loc_04_end_f.jpg"
+                  ], */
                 },
                 // Trail 2 end: TBD (trail 2 path not provided yet).
                 {
@@ -1003,10 +1019,14 @@ export const kowakujo: MapData = {
                   color: "#ef4444",
                   icon: "/images/easteregg/skull.svg",
                   position: { x: 31.9, y: 76.1 },
-                  revealImages: [
-                    "/images/easteregg/stage-2/step7-loc3-end.jpg",
-                    "/images/easteregg/stage-2/step8.jpg",
-                  ],
+                  /* revealImages: [
+                   "/images/easteregg/stage_02/stage_02_step_08_loc_04_end_a.jpg",
+                    "/images/easteregg/stage_02/stage_02_step_08_loc_04_end_b.jpg",
+                    "/images/easteregg/stage_02/stage_02_step_08_loc_04_end_c.jpg",
+                    "/images/easteregg/stage_02/stage_02_step_08_loc_04_end_d.jpg",
+                    "/images/easteregg/stage_02/stage_02_step_08_loc_04_end_e.jpg",
+                    "/images/easteregg/stage_02/stage_02_step_08_loc_04_end_f.jpg"
+                  ], */
                 },
                 {
                   label: "4",
@@ -1014,8 +1034,12 @@ export const kowakujo: MapData = {
                   icon: "/images/easteregg/skull.svg",
                   position: { x: 14.6, y: 62.3 },
                   revealImages: [
-                    "/images/easteregg/stage-2/step7-loc4-end.jpg",
-                    "/images/easteregg/stage-2/step8.jpg",
+                    "/images/easteregg/stage_02/stage_02_step_08_loc_04_end_a.jpg",
+                    "/images/easteregg/stage_02/stage_02_step_08_loc_04_end_b.jpg",
+                    "/images/easteregg/stage_02/stage_02_step_08_loc_04_end_c.jpg",
+                    "/images/easteregg/stage_02/stage_02_step_08_loc_04_end_d.jpg",
+                    "/images/easteregg/stage_02/stage_02_step_08_loc_04_end_e.jpg",
+                    "/images/easteregg/stage_02/stage_02_step_08_loc_04_end_f.jpg"
                   ],
                 },
               ],
@@ -1028,9 +1052,9 @@ export const kowakujo: MapData = {
               revealCaption:
                 "**Required perk:** Get **Death Perception** before searching for the cat.\n\nSearch the **Kitchens** or **Training Area**. The marked spots have creaky floorboards that make noise when stepped on, and Death Perception highlights them in orange.\n\nCrouch-walk early, avoid the noisy boards, then crouch beside the cat and interact to pick it up.",
               locations: [
-                { label: "1", position: { x: 76.6, y: 42 }, revealImage: "/images/easteregg/stage-2/step9-loc1.jpg" },
-                { label: "2", position: { x: 87, y: 61.3 }, revealImage: "/images/easteregg/stage-2/step9-loc2.jpg" },
-                { label: "3", position: { x: 27.2, y: 62.6 }, revealImage: "/images/easteregg/stage-2/step9-loc3.jpg" },
+                { label: "1", position: { x: 76.6, y: 42 }, revealImage: "/images/easteregg/stage_02/stage_02_step_09_loc_01.jpg" },
+                { label: "2", position: { x: 87, y: 61.3 }, revealImage: "/images/easteregg/stage_02/stage_02_step_09_loc_02.jpg" },
+                { label: "3", position: { x: 27.2, y: 62.6 }, revealImage: "/images/easteregg/stage_02/stage_02_step_09_loc_03.jpg" },
               ],
             },
             {
@@ -1041,8 +1065,10 @@ export const kowakujo: MapData = {
               icon: "/images/easteregg/star.svg",
               iconPosition: { x: 58.7, y: 8.2 },
               revealImages: [
-                "/images/easteregg/stage-2/stage10-1.jpg",
-                "/images/easteregg/stage-2/stage10-2.jpg",
+                "/images/easteregg/stage_02/stage_02_step_10_a.jpg",
+                "/images/easteregg/stage_02/stage_02_step_10_b.jpg",
+                "/images/easteregg/stage_02/stage_02_step_10_c.jpg",
+                "/images/easteregg/stage_02/stage_02_step_10_d.jpg",
               ],
               revealCaption:
                 "**Shogun's Sanctum:** Bring the cat back to the **World Seed** beside **Pack-a-Punch**. It will jump onto the seed automatically.\n\nWhen the seed glows red, it emits damaging shockwaves. Move in between shockwaves and melee the seed.\n\nAfter enough hits, the cat jumps off and drops nearby as the **Nekomancer Wonder Weapon**. When Pack-a-Punched, it becomes **Tsunderera-Hime**.",
@@ -1093,17 +1119,17 @@ export const kowakujo: MapData = {
                 { x: 35, y: 78.9 },
               ],
               locations: [
-                { label: "1", position: { x: 22, y: 52.9 }, revealImage: "/images/easteregg/stage-3/step1-lantern-01.jpg" },
-                { label: "2", position: { x: 32.7, y: 51.4 }, revealImage: "/images/easteregg/stage-3/step1-lantern-02.jpg" },
-                { label: "3", position: { x: 48.9, y: 49.4 }, revealImage: "/images/easteregg/stage-3/step1-lantern-03.jpg" },
-                { label: "4", position: { x: 51.8, y: 28.2 }, revealImage: "/images/easteregg/stage-3/step1-lantern-04.jpg" },
-                { label: "5", position: { x: 59.6, y: 53.5 }, revealImage: "/images/easteregg/stage-3/step1-lantern-05.jpg" },
-                { label: "6", position: { x: 73.4, y: 55.7 }, revealImage: "/images/easteregg/stage-3/step1-lantern-06.jpg" },
-                { label: "7", position: { x: 75, y: 78.7 }, revealImage: "/images/easteregg/stage-3/step1-lantern-07.jpg" },
-                { label: "8", position: { x: 56.2, y: 73.4 }, revealImage: "/images/easteregg/stage-3/step1-lantern-08.jpg" },
-                { label: "9", position: { x: 51, y: 88.1 }, revealImage: "/images/easteregg/stage-3/step1-lantern-09.jpg" },
-                { label: "10", position: { x: 48.7, y: 69.3 }, revealImage: "/images/easteregg/stage-3/step1-lantern10.jpg" },
-                { label: "11", position: { x: 35, y: 78.9 }, revealImage: "/images/easteregg/stage-3/step1-lantern11.jpg" },
+                { label: "1", position: { x: 22, y: 52.9 }, revealImage: "/images/easteregg/stage_03/stage_03_step_01_lantern_01.jpg" },
+                { label: "2", position: { x: 32.7, y: 51.4 }, revealImage: "/images/easteregg/stage_03/stage_03_step_01_lantern_02.jpg" },
+                { label: "3", position: { x: 48.9, y: 49.4 }, revealImage: "/images/easteregg/stage_03/stage_03_step_01_lantern_03.jpg" },
+                { label: "4", position: { x: 51.8, y: 28.2 }, revealImage: "/images/easteregg/stage_03/stage_03_step_01_lantern_04.jpg" },
+                { label: "5", position: { x: 59.6, y: 53.5 }, revealImage: "/images/easteregg/stage_03/stage_03_step_01_lantern_05.jpg" },
+                { label: "6", position: { x: 73.4, y: 55.7 }, revealImage: "/images/easteregg/stage_03/stage_03_step_01_lantern_06.jpg" },
+                { label: "7", position: { x: 75, y: 78.7 }, revealImage: "/images/easteregg/stage_03/stage_03_step_01_lantern_07.jpg" },
+                { label: "8", position: { x: 56.2, y: 73.4 }, revealImage: "/images/easteregg/stage_03/stage_03_step_01_lantern_08.jpg" },
+                { label: "9", position: { x: 51, y: 88.1 }, revealImage: "/images/easteregg/stage_03/stage_03_step_01_lantern_09.jpg" },
+                { label: "10", position: { x: 48.7, y: 69.3 }, revealImage: "/images/easteregg/stage_03/stage_03_step_01_lantern_10.jpg" },
+                { label: "11", position: { x: 35, y: 78.9 }, revealImage: "/images/easteregg/stage_03/stage_03_step_01_lantern_11.jpg" },
               ],
             },
             {
@@ -1113,7 +1139,10 @@ export const kowakujo: MapData = {
                 "Step into the blood on the War Room floor to trigger the cut-scene.",
               icon: "/images/easteregg/star.svg",
               iconPosition: { x: 51, y: 10 },
-              revealImage: "/images/easteregg/stage-3/step2.jpg",
+              revealImages: ["/images/easteregg/stage_03/stage_03_step_02_a.jpg",
+                "/images/easteregg/stage_03/stage_03_step_02_b.jpg",
+                "/images/easteregg/stage_03/stage_03_step_02_c.jpg"
+              ],
             },
           ],
         },
@@ -1135,8 +1164,8 @@ export const kowakujo: MapData = {
                 { x: 43.7, y: 57.7 },
               ],
               locations: [
-                { label: "1", position: { x: 47.7, y: 12.6 }, revealImage: "/images/easteregg/stage-4/step1-1.jpg" },
-                { label: "2", position: { x: 43.7, y: 57.7 }, revealImage: "/images/easteregg/stage-4/step1-2.jpg" },
+                { label: "1", position: { x: 47.7, y: 12.6 }, revealImages: ["/images/easteregg/stage_04/stage_04_step_01_a.jpg", "/images/easteregg/stage_04/stage_04_step_01_b.jpg", "/images/easteregg/stage_04/stage_04_step_01_c.jpg", "/images/easteregg/stage_04/stage_04_step_01_d.jpg"] },
+                { label: "2", position: { x: 43.7, y: 57.7 }, revealImages: ["/images/easteregg/stage_04/stage_04_step_01_d.jpg"] },
               ],
             },
             {
@@ -1148,17 +1177,8 @@ export const kowakujo: MapData = {
                 "**Storage Rooms:** Bring the **Fox Mask** to the mask wall and start the minigame.\n\nThe masks glow blue in a sequence, then zombies spawn wearing matching masks. Kill the masked zombies in the same order the wall masks glowed. Complete three rounds to finish the step.\n\n**Failure rules:** Shooting the zombies out of order fails the attempt. Leaving the Storage Rooms also fails it.\n\n**Tip:** Shock Charges and Stun Grenades help hold zombies still. Avoid Aether Shroud because it can make the zombies leave the area.\n\nWhen complete, interact with the mask at the bottom of the wall to trigger the cutscene. The Fox Mask then flies to one of the next locations.",
                solidMarkers: true,
                 locations: [
-                { label: "1", position: { x: 42.9, y: 25 }, revealImages: ["/images/easteregg/stage-4/step2-1.jpg", "/images/easteregg/stage-4/step2-2.jpg"] },
+                { label: "1", position: { x: 42.9, y: 25 }, revealImages: ["/images/easteregg/stage_04/stage_04_step_02_a.jpg", "/images/easteregg/stage_04/stage_04_step_02_b.jpg", "/images/easteregg/stage_04/stage_04_step_02_c.jpg", "/images/easteregg/stage_04/stage_04_step_02_d.jpg", "/images/easteregg/stage_04/stage_04_step_02_e.jpg"] },
               ],
-            },
-            {
-              id: "s4-ceramic-shard",
-              title: "Broken Ceramic Shard",
-              instruction:
-                "Find the ceramic shard near the pool of blood by the Pack-a-Punch stairs.",
-              icon: "/images/easteregg/star.svg",
-              iconPosition: { x: 51.2, y: 11.4 },
-              revealImage: "/images/easteregg/stage-4/step3.png",
             },
           ],
         },
@@ -1175,10 +1195,10 @@ export const kowakujo: MapData = {
                 "**Meditation Room:** The evidences are placed on the shelves inside this room.\n\nShoot the moving **Fox Mask** when it hides around the map. Each hit drops one evidence item.\n\n- **Takeshi's Pipe:** Bottom shelf left of the stairs in the **Workshop**.\n- **Takeo's Case:** In the ceiling of the **Collapsed Study**.\n- **Mitsuhime's Comb:** Far left, outside the window left of **Elemental Pop** in the **Onsen Baths**.\n\nPlace all three evidences on the Meditation Room shelves. When done correctly, a painting of a person wearing the fox mask appears on the other side of the room.",
               solidMarkers: true,
               locations: [
-                { label: "1", position: { x: 36, y: 13.1 }, revealImage: "/images/easteregg/stage-5/step1-1.png" },
-                { label: "2", position: { x: 41, y: 35.1 }, revealImage: "/images/easteregg/stage-5/step1-2.png" },
-                { label: "3", position: { x: 56.1, y: 18.5 }, revealImage: "/images/easteregg/stage-5/step1-3.png" },
-                { label: "4", position: { x: 38.2, y: 20 }, revealImage: "/images/easteregg/stage-5/step1-4.png" },
+                { label: "1", position: { x: 36, y: 13.1 }, revealImages: ["/images/easteregg/stage_05/stage_05_step_01_a.jpg", "/images/easteregg/stage_05/stage_05_step_01_aa.jpg"] },
+                { label: "2", position: { x: 41, y: 35.1 }, revealImages: ["/images/easteregg/stage_05/stage_05_step_01_b.jpg", "/images/easteregg/stage_05/stage_05_step_01_bb.jpg"] },
+                { label: "3", position: { x: 56.1, y: 18.5 }, revealImages: ["/images/easteregg/stage_05/stage_05_step_01_c.jpg", "/images/easteregg/stage_05/stage_05_step_01_cc.jpg"] },
+                { label: "4", position: { x: 38.2, y: 20 }, revealImages: ["/images/easteregg/stage_05/stage_05_step_01_d.jpg", "/images/easteregg/stage_05/stage_05_step_01_e.jpg", "/images/easteregg/stage_05/stage_05_step_01_f.jpg"] },
               ],
             },
             {
@@ -1197,7 +1217,7 @@ export const kowakujo: MapData = {
                     "**Mystery Box:** Find the box with the Japanese wooden plaque on its base.\n\nMove that Mystery Box to the marked spot before continuing.",
                   // Placed off-map (bottom-left margin) — the box can be anywhere.
                   position: { x: 15, y: 90 },
-                  revealImage: "/images/easteregg/stage-5/step2-merch-sub1.jpg",
+                  revealImages: ["/images/easteregg/stage_05/stage_05_step_02_merch_01_a.jpg", "/images/easteregg/stage_05/stage_05_step_02_merch_01_b.jpg"],
                 },
                 {
                   label: "2",
@@ -1205,7 +1225,7 @@ export const kowakujo: MapData = {
                   revealCaption:
                     "**Mystery Box:** Throw the **Maneki-Neko** in front of the box while using it.\n\nIf done correctly, the **Coin Purse** becomes available to pick up.",
                   position: { x: 15, y: 94 },
-                  revealImage: "/images/easteregg/stage-5/step2-merch-sub2.jpg",
+                  revealImages: ["/images/easteregg/stage_05/stage_05_step_02_merch_02_a.jpg", "/images/easteregg/stage_05/stage_05_step_02_merch_02_b.jpg"],
                 },
                 {
                   label: "3",
@@ -1213,7 +1233,7 @@ export const kowakujo: MapData = {
                   revealCaption:
                     "**Outer Ward:** Place the **Coin Purse** to the right of the Rampage Inducer.\n\nInteract again after placing it to trigger the short cinematic.",
                   position: { x: 52.5, y: 95.4 },
-                  revealImage: "/images/easteregg/stage-5/step2-merch-sub3.jpg",
+                  revealImages: ["/images/easteregg/stage_05/stage_05_step_02_merch_03_a.jpg", "/images/easteregg/stage_05/stage_05_step_02_merch_03_b.jpg"],
                 },
                 {
                   label: "4",
@@ -1231,7 +1251,7 @@ export const kowakujo: MapData = {
                     { x: 51.5, y: 68.5 },
                     { x: 47.9, y: 69.7 },
                   ],
-                  revealImage: "/images/easteregg/stage-5/step2-merch-sub4.jpg",
+                  revealImages: ["/images/easteregg/stage_05/stage_05_step_02_merch_04_a.jpg", "/images/easteregg/stage_05/stage_05_step_02_merch_04_b.jpg", "/images/easteregg/stage_05/stage_05_step_02_merch_04_c.jpg", "/images/easteregg/stage_05/stage_05_step_02_merch_04_d.jpg", "/images/easteregg/stage_05/stage_05_step_02_merch_04_e.jpg"],
                 },
                 {
                   label: "5",
@@ -1239,7 +1259,7 @@ export const kowakujo: MapData = {
                   revealCaption:
                     "**Staging Area:** Lead the fruit-carrying zombie to the shack window and kill it there.\n\nIf done correctly, the **Merchant** spawns. Kill the Merchant to collect the note and **Mercantile Abacus**.",
                   position: { x: 47.9, y: 69.7 },
-                  revealImage: "/images/easteregg/stage-5/step2-merch-sub5.jpg",
+                  revealImages: ["/images/easteregg/stage_05/stage_05_step_02_merch_05_a.jpg", "/images/easteregg/stage_05/stage_05_step_02_merch_05_b.jpg", "/images/easteregg/stage_05/stage_05_step_02_merch_05_c.jpg", "/images/easteregg/stage_05/stage_05_step_02_merch_05_d.jpg"],
                 },
               ],
             },
@@ -1257,7 +1277,12 @@ export const kowakujo: MapData = {
                   solid: false,
                   positions: [
                     { x: 33, y: 50.4 },
-                    { x: 55.1, y: 31 },
+                    { x: 53, y: 28.3 },
+                  ],
+                  positionImageIndices: [0, 1],
+                  revealImages: [
+                    "/images/easteregg/stage_05/stage_05_step_02_gardener_01_a.jpg",
+                    "/images/easteregg/stage_05/stage_05_step_02_gardener_01_c.jpg",
                   ],
                 },
                 {
@@ -1269,6 +1294,11 @@ export const kowakujo: MapData = {
                   positions: [
                     { x: 33, y: 54.9 },
                     { x: 56.1, y: 31.5 },
+                  ],
+                  positionImageIndices: [0, 1],
+                  revealImages: [
+                    "/images/easteregg/stage_05/stage_05_step_02_gardener_01_b.jpg",
+                    "/images/easteregg/stage_05/stage_05_step_02_gardener_01_d.jpg",
                   ],
                 },
                 {
@@ -1286,9 +1316,9 @@ export const kowakujo: MapData = {
                   positionLabels: ["1", "2", "3"],
                   positionImageIndices: [0, 1, 2],
                   revealImages: [
-                    "/images/easteregg/stage-5/step2-garden-3_a.jpg",
-                    "/images/easteregg/stage-5/step2-garden-3_b.jpg",
-                    "/images/easteregg/stage-5/step2-garden-3_c.jpg",
+                    "/images/easteregg/stage_05/stage_05_step_02_gardener_02_a.jpg",
+                    "/images/easteregg/stage_05/stage_05_step_02_gardener_02_b.jpg",
+                    "/images/easteregg/stage_05/stage_05_step_02_gardener_02_c.jpg",
                   ],
                 },
                 {
@@ -1300,6 +1330,12 @@ export const kowakujo: MapData = {
                   positions: [
                     { x: 72.8, y: 73 },
                     { x: 81.1, y: 68.3 },
+                  ],
+                  revealImages: [
+                    "/images/easteregg/stage_05/stage_05_step_02_gardener_03_a.jpg",
+                    "/images/easteregg/stage_05/stage_05_step_02_gardener_03_b.jpg",
+                    "/images/easteregg/stage_05/stage_05_step_02_gardener_03_c.jpg",
+                    "/images/easteregg/stage_05/stage_05_step_02_gardener_03_d.jpg",
                   ],
                 },
               ],
@@ -1317,15 +1353,16 @@ export const kowakujo: MapData = {
                   revealCaption:
                     "**Training Area:** Hit the wooden beam above the Ammo Cache with a charged **Nekomancer** shot or a grenade.\n\nIf done correctly, the **Empty Pouch** drops to the ground.",
                   position: { x: 25.7, y: 61.4 },
-                  revealImage: "/images/easteregg/stage-5/step3-flower-1.png",
+                  revealImages: ["/images/easteregg/stage_05/stage_05_step_03_flower_01_a.jpg", "/images/easteregg/stage_05/stage_05_step_03_flower_01_b.jpg"],
                 },
                 {
                   label: "2",
                   text: "When a Fissure becomes active on the map, stay near it until the Volcanic Ash is collected. Move in and out of it to minimise damage.",
                   revealCaption:
                     "**Volcanic Ash:** Wait for a Fissure to become active, then stay near it until the ash is collected.\n\nMove in and out of the Fissure to manage damage.",
-                  // Fissures are random — no fixed map marker.
-                  revealImage: "/images/easteregg/stage-5/step3-flower-2.png",
+                  // Fissures are random — placed off-map (bottom-left margin).
+                  position: { x: 15, y: 90 },
+                  revealImages: ["/images/easteregg/stage_05/stage_05_step_03_flower_02_a.jpg", "/images/easteregg/stage_05/stage_05_step_03_flower_02_b.jpg"],
                 },
                 {
                   label: "3",
@@ -1333,7 +1370,7 @@ export const kowakujo: MapData = {
                   revealCaption:
                     "**Flower Garden:** Collect the **Monkshood Bud** from the ground near the lava river and broken bridge.",
                   position: { x: 77.8, y: 75.5 },
-                  revealImage: "/images/easteregg/stage-5/step3-flower-3.png",
+                  revealImages: ["/images/easteregg/stage_05/stage_05_step_03_flower_03_a.jpg", "/images/easteregg/stage_05/stage_05_step_03_flower_03_b.jpg"],
                 },
                 {
                   label: "4",
@@ -1341,17 +1378,19 @@ export const kowakujo: MapData = {
                   revealCaption:
                     "**Tenshu Entrance:** Plant the **Monkshood Bud** in the pot near the Exfil phone booth, then place the **Volcanic Ash** on the pot.",
                   position: { x: 46, y: 37 },
-                  revealImage: "/images/easteregg/stage-5/step3-flower-4.png",
+                  revealImages: ["/images/easteregg/stage_05/stage_05_step_03_flower_04_a.jpg", "/images/easteregg/stage_05/stage_05_step_03_flower_04_b.jpg"],
                 },
                 {
                   label: "5",
                   text: "Melee a cherry blossom tree until it and you glow, then return to the pot and spin around until a small tornado appears. Done correctly, the Monkshood Flower can be picked up.",
                   revealCaption:
                     "**Grow the flower:** Melee a cherry blossom tree until both you and the tree glow.\n\nReturn to the pot and spin around until a small tornado appears. If done correctly, the **Monkshood Flower** can be picked up.",
-                  // Path TBD.
+                  position: { x: 42.5, y: 39.7 },
                   revealImages: [
-                    "/images/easteregg/stage-5/step3-flower-5_1.jpg",
-                    "/images/easteregg/stage-5/step3-flower-5_2.jpg",
+                    "/images/easteregg/stage_05/stage_05_step_03_flower_05_a.jpg",
+                    "/images/easteregg/stage_05/stage_05_step_03_flower_05_b.jpg",
+                    "/images/easteregg/stage_05/stage_05_step_03_flower_05_c.jpg",
+                    "/images/easteregg/stage_05/stage_05_step_03_flower_05_d.jpg",
                   ],
                 },
               ],
@@ -1370,8 +1409,10 @@ export const kowakujo: MapData = {
                     "**Kitchens:** Melee the small basket on the shelf near the fire pit to drop a plum.\n\nJump on the plum repeatedly until it becomes the **Plum Pit**, then collect it.",
                   position: { x: 77.5, y: 42.6 },
                   revealImages: [
-                    "/images/easteregg/stage-5/step3-plum-1.png",
-                    "/images/easteregg/stage-5/step3-plum-2.png",
+                    "/images/easteregg/stage_05/stage_05_step_03_plum_01_a.jpg",
+                    "/images/easteregg/stage_05/stage_05_step_03_plum_01_b.jpg",
+                    "/images/easteregg/stage_05/stage_05_step_03_plum_01_c.jpg",
+                    "/images/easteregg/stage_05/stage_05_step_03_plum_01_d.jpg",
                   ],
                 },
               ],
@@ -1389,7 +1430,7 @@ export const kowakujo: MapData = {
                   revealCaption:
                     "**Shogun's Hanko:** This is collected from the first Oni during **Stage 1, Step 3**.",
                   position: { x: 52.3, y: 10.1 },
-                  revealImage: "/images/easteregg/stage-1/step3.jpg",
+                  revealImage: "/images/easteregg/stage_01/stage_01_step_03_c.jpg",
                 },
                 {
                   label: "2",
@@ -1397,7 +1438,7 @@ export const kowakujo: MapData = {
                   revealCaption:
                     "**Stables:** Wait for the lava to harden, then find the tiny statue.\n\nThrow a **Molotov** at it, then collect the **Netsuke of Brothers**.",
                   position: { x: 36, y: 76 },
-                  revealImage: "/images/easteregg/stage-5/step5-brothers-2.png",
+                  revealImages: ["/images/easteregg/stage_05/stage_05_step_05_brothers_01_a.jpg", "/images/easteregg/stage_05/stage_05_step_05_brothers_01_b.jpg", "/images/easteregg/stage_05/stage_05_step_05_brothers_01_c.jpg"],
                 },
               ],
             },

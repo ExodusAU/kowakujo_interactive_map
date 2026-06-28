@@ -1,7 +1,9 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
-import { type ReactNode, useEffect, useState } from "react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
+
+const ZOOM_FACTOR = 2.6;
 
 export interface RevealContent {
   title: string;
@@ -38,12 +40,19 @@ export default function RevealModal({ content, onClose }: RevealModalProps) {
         : [];
 
   const [index, setIndex] = useState(0);
+  // Magnify state: zoomed-in flag + the focal point (percent of the image) the
+  // zoom centres on, which follows the cursor.
+  const [zoomed, setZoomed] = useState(false);
+  const [origin, setOrigin] = useState({ x: 50, y: 50 });
+  const imgRef = useRef<HTMLImageElement>(null);
 
   // Reset to the requested image whenever the modal content changes (React's
   // adjust-state-during-render pattern; no effect needed).
   const [seen, setSeen] = useState<RevealContent | null>(null);
   if (content !== seen) {
     setSeen(content);
+    setZoomed(false);
+    setOrigin({ x: 50, y: 50 });
     setIndex(
       Math.min(
         Math.max(content?.startIndex ?? 0, 0),
@@ -51,6 +60,17 @@ export default function RevealModal({ content, onClose }: RevealModalProps) {
       ),
     );
   }
+
+  const onZoomMove = (e: React.MouseEvent) => {
+    if (!zoomed) return;
+    const el = imgRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    setOrigin({
+      x: Math.min(100, Math.max(0, ((e.clientX - r.left) / r.width) * 100)),
+      y: Math.min(100, Math.max(0, ((e.clientY - r.top) / r.height) * 100)),
+    });
+  };
 
   useEffect(() => {
     if (!content) return;
@@ -98,18 +118,41 @@ export default function RevealModal({ content, onClose }: RevealModalProps) {
         </div>
 
         <div className="flex min-h-0 flex-1 flex-col bg-zinc-950 md:flex-row">
-          <div className="relative flex min-h-[48vh] flex-1 items-center justify-center bg-black p-2 sm:p-3 md:min-h-0">
+          <div className="relative flex min-h-[48vh] flex-1 items-center justify-center overflow-hidden bg-black p-2 sm:p-3 md:min-h-0">
             {images.length ? (
               <img
+                ref={imgRef}
                 src={images[index]}
                 alt={content.title}
-                className={`h-auto w-auto max-w-full object-contain ${imageMaxHeight}`}
+                onMouseMove={onZoomMove}
+                onClick={() => setZoomed((z) => !z)}
+                className={`h-auto w-auto max-w-full object-contain transition-transform duration-150 ${imageMaxHeight} ${
+                  zoomed ? "cursor-zoom-out" : "cursor-zoom-in"
+                }`}
+                style={{
+                  transform: zoomed ? `scale(${ZOOM_FACTOR})` : "none",
+                  transformOrigin: `${origin.x}% ${origin.y}%`,
+                }}
               />
             ) : (
               <div className="flex h-56 flex-col items-center justify-center gap-2 px-6 text-center text-zinc-500">
                 <span className="text-sm font-medium">No screenshot yet</span>
                 <p className="text-sm">Screenshot coming soon.</p>
               </div>
+            )}
+
+            {/* Magnify toggle */}
+            {images.length > 0 && (
+              <button
+                type="button"
+                onClick={() => setZoomed((z) => !z)}
+                className="absolute right-3 top-3 flex h-10 items-center gap-1.5 rounded-full bg-black/65 px-3 text-sm font-medium text-white transition-colors hover:bg-black/85"
+                aria-label={zoomed ? "Zoom out" : "Zoom in"}
+                title="Zoom (or click the image)"
+              >
+                <span className="text-base">{zoomed ? "🔍−" : "🔍+"}</span>
+                {zoomed ? "Reset" : "Zoom"}
+              </button>
             )}
 
             {hasGallery && (

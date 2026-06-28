@@ -1,6 +1,7 @@
 "use client";
 
 import { type ReactNode, useState } from "react";
+import Image from "next/image";
 import type { EggStep, Floor, MapData } from "@/lib/maps/types";
 
 interface MapSidebarProps {
@@ -211,7 +212,14 @@ export default function MapSidebar(props: MapSidebarProps) {
   return (
     <aside className="flex h-full w-80 shrink-0 flex-col border-r border-white/10 bg-zinc-950 text-zinc-200">
       <div className="border-b border-white/10 px-4 py-4">
-        <h1 className="text-lg font-bold text-white">{data.name}</h1>
+        <Image
+          src="/maps/kowakujo_logo.png"
+          alt={data.name}
+          width={701}
+          height={242}
+          priority
+          className="h-auto w-48 max-w-full"
+        />
         <p className="text-xs text-zinc-500">Interactive Zombies Map</p>
       </div>
 
