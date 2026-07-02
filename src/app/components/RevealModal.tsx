@@ -285,10 +285,8 @@ export function FormattedDescription({ text }: { text: string }) {
 function normalizeDescriptionText(text: string): string {
   return text
     .replace(/\r\n?/g, "\n")
-    .replace(
-      /\s+-\s+(?=(?:\*\*)?[A-Z][A-Za-z' ]{1,32}(?:\*\*)?\s*(?:→|=|:))/g,
-      "\n- ",
-    );
+    .replace(/\\n/g, "\n")
+    .replace(/[ \t]+[-*][ \t]+(?=(?:\*\*)?[^-\n]{1,80}(?:→|=))/g, "\n- ");
 }
 
 function isBulletLine(line: string): boolean {
@@ -332,7 +330,7 @@ function formatListItem(text: string): ReactNode[] {
 
 function formatInline(text: string): ReactNode[] {
   return text
-    .split(/(\*\*[^*]+\*\*|\[[^\]]+\]\(https?:\/\/[^)]+\)|https?:\/\/[^\s)]+)/g)
+    .split(/(\*\*[^*]+\*\*|\[[^\]]+\]\(https?:\/\/[^)]+\)|https?:\/\/[^\s<]+)/g)
     .filter(Boolean)
     .map((part, index) => {
       if (part.startsWith("**") && part.endsWith("**")) {
@@ -353,10 +351,16 @@ function formatInline(text: string): ReactNode[] {
       }
 
       if (/^https?:\/\//.test(part)) {
+        const [, href, trailing = ""] =
+          part.match(/^(https?:\/\/.*?)([.,;:!?)]*)$/) ?? [];
+        const safeHref = href ?? part;
         return (
-          <ExternalTextLink key={index} href={part}>
-            {part.replace(/^https?:\/\//, "").replace(/\/$/, "")}
-          </ExternalTextLink>
+          <span key={index}>
+            <ExternalTextLink href={safeHref}>
+              {safeHref.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+            </ExternalTextLink>
+            {trailing}
+          </span>
         );
       }
 
