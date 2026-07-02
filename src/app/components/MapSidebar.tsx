@@ -4,6 +4,7 @@ import { type ReactNode, useState } from "react";
 import Image from "next/image";
 import type { EggStep, Floor, MapData } from "@/lib/maps/types";
 import { stepColorFor } from "@/lib/maps/stepColors";
+import { FormattedDescription } from "./RevealModal";
 
 interface MapSidebarProps {
   data: MapData;
@@ -156,6 +157,13 @@ function ImageLegendIcon({
       }}
     />
   );
+}
+
+function stepSummary(text: string): string {
+  return text
+    .split(/\n/)
+    .map((line) => line.trim())
+    .find(Boolean) ?? "";
 }
 
 export default function MapSidebar(props: MapSidebarProps) {
@@ -508,7 +516,7 @@ export default function MapSidebar(props: MapSidebarProps) {
                                         {step.title}
                                       </span>
                                       <span className="block text-xs leading-snug text-zinc-400">
-                                        {step.instruction}
+                                        {stepSummary(step.instruction)}
                                       </span>
                                       {active && (
                                         <span
@@ -526,6 +534,14 @@ export default function MapSidebar(props: MapSidebarProps) {
                                       )}
                                     </span>
                                   </button>
+
+                                  {active && (
+                                    <div className="mb-2 mt-1 rounded-md border border-white/10 bg-black/25 px-3 py-2">
+                                      <FormattedDescription
+                                        text={step.revealCaption ?? step.instruction}
+                                      />
+                                    </div>
+                                  )}
 
                                   {active &&
                                     step.locations?.some((l) => l.text) && (

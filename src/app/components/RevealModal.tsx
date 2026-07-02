@@ -241,47 +241,146 @@ export default function RevealModal({ content, onClose }: RevealModalProps) {
 }
 
 export function FormattedDescription({ text }: { text: string }) {
-  const blocks = text
+  const blocks = normalizeDescriptionText(text)
     .split(/\n{2,}/)
     .map((block) => block.trim())
     .filter(Boolean);
 
   return (
-    <div className="space-y-3 text-sm leading-relaxed text-zinc-300">
+    <div className="space-y-3 text-[13px] leading-6 text-zinc-300">
       {blocks.map((block, blockIndex) => {
         const lines = block
           .split(/\n/)
           .map((line) => line.trim())
           .filter(Boolean);
-        const isList = lines.length > 1 && lines.every((line) => line.startsWith("- "));
 
-        if (isList) {
+        const firstBullet = lines.findIndex((line) => isBulletLine(line));
+        const leadLines = firstBullet === -1 ? lines : lines.slice(0, firstBullet);
+        const bulletLines = firstBullet === -1 ? [] : lines.slice(firstBullet);
+
+        if (bulletLines.length) {
           return (
-            <ul key={blockIndex} className="list-disc space-y-1 pl-5">
-              {lines.map((line, lineIndex) => (
-                <li key={lineIndex}>{formatInline(line.slice(2))}</li>
-              ))}
-            </ul>
+            <div key={blockIndex} className="space-y-2">
+              {leadLines.length > 0 && (
+                <p>{formatLeadParagraph(leadLines.join(" "))}</p>
+              )}
+              <ul className="space-y-1.5 border-l border-cyan-300/25 pl-4">
+                {bulletLines.map((line, lineIndex) => (
+                  <li key={lineIndex} className="flex gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-300/80" />
+                    <span className="min-w-0">{formatListItem(stripBullet(line))}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           );
         }
 
-        return <p key={blockIndex}>{formatInline(lines.join(" "))}</p>;
+        return <p key={blockIndex}>{formatLeadParagraph(lines.join(" "))}</p>;
       })}
     </div>
   );
 }
 
+function normalizeDescriptionText(text: string): string {
+  return text
+    .replace(/\r\n?/g, "\n")
+    .replace(
+      /\s+-\s+(?=(?:\*\*)?[A-Z][A-Za-z' ]{1,32}(?:\*\*)?\s*(?:→|=|:))/g,
+      "\n- ",
+    );
+}
+
+function isBulletLine(line: string): boolean {
+  return /^[-*]\s+/.test(line);
+}
+
+function stripBullet(line: string): string {
+  return line.replace(/^[-*]\s+/, "");
+}
+
+function formatLeadParagraph(text: string): ReactNode[] {
+  const match = text.match(/^([^:]{2,48}):\s+(.+)$/);
+  if (!match) return formatInline(text);
+
+  return [
+    <strong key="lead" className="font-semibold text-zinc-100">
+      {match[1]}:
+    </strong>,
+    " ",
+    ...formatInline(match[2]),
+  ];
+}
+
+function formatListItem(text: string): ReactNode[] {
+  const arrowIndex = text.indexOf("→");
+  if (arrowIndex === -1) return formatLeadParagraph(text);
+
+  const label = text.slice(0, arrowIndex).trim();
+  const value = text.slice(arrowIndex + 1).trim();
+
+  return [
+    <strong key="label" className="font-semibold text-zinc-100">
+      {formatInline(label)}
+    </strong>,
+    <span key="arrow" className="mx-1 text-cyan-300/80">
+      →
+    </span>,
+    ...formatInline(value),
+  ];
+}
+
 function formatInline(text: string): ReactNode[] {
-  return text.split(/(\*\*[^*]+\*\*)/g).map((part, index) => {
-    if (part.startsWith("**") && part.endsWith("**")) {
-      return (
-        <strong key={index} className="font-semibold text-zinc-100">
-          {part.slice(2, -2)}
-        </strong>
-      );
-    }
-    return part;
-  });
+  return text
+    .split(/(\*\*[^*]+\*\*|\[[^\]]+\]\(https?:\/\/[^)]+\)|https?:\/\/[^\s)]+)/g)
+    .filter(Boolean)
+    .map((part, index) => {
+      if (part.startsWith("**") && part.endsWith("**")) {
+        return (
+          <strong key={index} className="font-semibold text-zinc-100">
+            {part.slice(2, -2)}
+          </strong>
+        );
+      }
+
+      const markdownLink = part.match(/^\[([^\]]+)\]\((https?:\/\/[^)]+)\)$/);
+      if (markdownLink) {
+        return (
+          <ExternalTextLink key={index} href={markdownLink[2]}>
+            {markdownLink[1]}
+          </ExternalTextLink>
+        );
+      }
+
+      if (/^https?:\/\//.test(part)) {
+        return (
+          <ExternalTextLink key={index} href={part}>
+            {part.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+          </ExternalTextLink>
+        );
+      }
+
+      return part;
+    });
+}
+
+function ExternalTextLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: ReactNode;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className="font-medium text-cyan-200 underline decoration-cyan-300/40 underline-offset-4 transition-colors hover:text-cyan-100 hover:decoration-cyan-200"
+    >
+      {children}
+    </a>
+  );
 }
 
 function StepNavButton({

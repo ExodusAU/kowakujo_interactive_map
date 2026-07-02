@@ -1,6 +1,6 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import type { EasterEgg, EggLocation, EggStep } from "@/lib/maps/types";
 import { stepColorFor } from "@/lib/maps/stepColors";
@@ -252,11 +252,15 @@ function ImageGrid({
           className="group relative aspect-video overflow-hidden rounded border border-white/10 transition hover:border-cyan-300/70"
           title="Click to enlarge"
         >
-          <img
+          {/* Optimized thumbnail — the source screenshots are multi-MB, so
+              they must NOT be loaded full-size in a 200-image sheet. */}
+          <Image
             src={src}
             alt={`${title} — screenshot ${i + 1}`}
-            loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-150 group-hover:scale-105"
+            fill
+            sizes="(min-width: 640px) 240px, 45vw"
+            quality={55}
+            className="object-cover transition-transform duration-150 group-hover:scale-105"
             draggable={false}
           />
           {images.length > 1 && (
