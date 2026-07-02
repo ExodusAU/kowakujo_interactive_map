@@ -125,6 +125,8 @@ const InteractiveMap = forwardRef<MapStageHandle, InteractiveMapProps>(
     });
     const [dragging, setDragging] = useState(false);
     const [cursor, setCursor] = useState<MapPoint | null>(null);
+    const [copiedCoords, setCopiedCoords] = useState<string | null>(null);
+    const copiedTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
     const dragState = useRef<{
       startX: number;
       startY: number;
@@ -279,9 +281,18 @@ const InteractiveMap = forwardRef<MapStageHandle, InteractiveMapProps>(
       const wasClick = dragState.current && !dragState.current.moved;
       dragState.current = null;
       setDragging(false);
-      if (drawMode && wasClick) {
+      if (wasClick) {
         const p = clientToImagePercent(e.clientX, e.clientY);
-        if (p) onDrawPoint(p);
+        if (p && drawMode) {
+          onDrawPoint(p);
+        } else if (p && !drawMode && devCoords) {
+          const text = `{ x: ${p.x}, y: ${p.y} }`;
+          navigator.clipboard.writeText(text).then(() => {
+            setCopiedCoords(text);
+            if (copiedTimer.current) clearTimeout(copiedTimer.current);
+            copiedTimer.current = setTimeout(() => setCopiedCoords(null), 1500);
+          });
+        }
       }
     };
 
@@ -613,107 +624,146 @@ const InteractiveMap = forwardRef<MapStageHandle, InteractiveMapProps>(
           )}
 
           {/* Location markers: numbered circles, point icons, or the START of
-              a trail (the trail's end is usually a later step's marker). */}
-          {eggRoutes.flatMap((r) =>
-            r.locations.flatMap((loc) => {
-              // Build the clickable spots for this location.
-              const spots: {
-                key: string;
-                pos: MapPoint;
-                label: string;
-                imageIndex: number;
-              }[] = [];
-              if (loc.path && loc.path.length) {
-                spots.push({
-                  key: `${r.id}-${loc.index}-s`,
-                  pos: loc.path[0],
-                  label: loc.label,
-                  imageIndex: 0,
-                });
-              } else if (loc.positions && loc.positions.length) {
-                loc.positions.forEach((p, k) =>
+              a trail (the trail's end is usually a later step's marker).
+              Spots that share the same map position are fanned out
+              side-by-side (in screen px, so the spread is zoom-independent)
+              to keep every circle visible and clickable. */}
+          {(() => {
+            interface LocSpot {
+              key: string;
+              pos: MapPoint;
+              label: string;
+              imageIndex: number;
+              routeId: string;
+              loc: EggRoute["locations"][number];
+            }
+            const spots: LocSpot[] = [];
+            for (const r of eggRoutes) {
+              for (const loc of r.locations) {
+                if (loc.path && loc.path.length) {
                   spots.push({
-                    key: `${r.id}-${loc.index}-${k}`,
-                    pos: p,
-                    label: loc.positionLabels?.[k] ?? loc.label,
-                    imageIndex: loc.positionImageIndices?.[k] ?? 0,
-                  }),
-                );
-              } else if (loc.position) {
-                spots.push({
-                  key: `${r.id}-${loc.index}`,
-                  pos: loc.position,
-                  label: loc.label,
-                  imageIndex: 0,
-                });
+                    key: `${r.id}-${loc.index}-s`,
+                    pos: loc.path[0],
+                    label: loc.label,
+                    imageIndex: 0,
+                    routeId: r.id,
+                    loc,
+                  });
+                } else if (loc.positions && loc.positions.length) {
+                  loc.positions.forEach((p, k) =>
+                    spots.push({
+                      key: `${r.id}-${loc.index}-${k}`,
+                      pos: p,
+                      label: loc.positionLabels?.[k] ?? loc.label,
+                      imageIndex: loc.positionImageIndices?.[k] ?? 0,
+                      routeId: r.id,
+                      loc,
+                    }),
+                  );
+                } else if (loc.position) {
+                  spots.push({
+                    key: `${r.id}-${loc.index}`,
+                    pos: loc.position,
+                    label: loc.label,
+                    imageIndex: 0,
+                    routeId: r.id,
+                    loc,
+                  });
+                }
               }
+            }
 
-              return spots.map((spot) =>
-                loc.icon ? (
-                  <button
-                    key={spot.key}
-                    data-marker
-                    type="button"
-                    title={`Location ${spot.label} - open details`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onEggLocationClick(r.id, loc.index, spot.imageIndex);
-                    }}
-                    className="absolute z-[60] flex items-center justify-center"
+            // Group spots that land on (nearly) the same point — within 0.15%
+            // of the image — and compute a horizontal pixel offset for each.
+            const groups = new Map<string, LocSpot[]>();
+            for (const s of spots) {
+              const gk = `${Math.round(s.pos.x / 0.15)}|${Math.round(s.pos.y / 0.15)}`;
+              const g = groups.get(gk);
+              if (g) g.push(s);
+              else groups.set(gk, [s]);
+            }
+            const fanOffset = (s: LocSpot): number => {
+              const gk = `${Math.round(s.pos.x / 0.15)}|${Math.round(s.pos.y / 0.15)}`;
+              const g = groups.get(gk)!;
+              if (g.length < 2) return 0;
+              return (g.indexOf(s) - (g.length - 1) / 2) * 40;
+            };
+
+            return spots.map((spot) => {
+              const { loc } = spot;
+              // Applied after the counter-scale, so it lands in screen px.
+              const xf = `translate(-50%, -50%) scale(${1 / transform.scale}) translate(${fanOffset(spot)}px, 0)`;
+              return loc.icon ? (
+                <button
+                  key={spot.key}
+                  data-marker
+                  type="button"
+                  title={`Location ${spot.label} - open details`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onEggLocationClick(spot.routeId, loc.index, spot.imageIndex);
+                  }}
+                  className="absolute z-[60] flex items-center justify-center"
+                  style={{
+                    left: `${spot.pos.x}%`,
+                    top: `${spot.pos.y}%`,
+                    width: 42,
+                    height: 42,
+                    transform: xf,
+                  }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={loc.icon}
+                    alt={`Location ${spot.label}`}
+                    className="h-full w-full object-contain"
+                    draggable={false}
                     style={{
-                      left: `${spot.pos.x}%`,
-                      top: `${spot.pos.y}%`,
-                      width: 42,
-                      height: 42,
-                      transform: `translate(-50%, -50%) scale(${1 / transform.scale})`,
+                      filter: `drop-shadow(0 0 6px ${loc.color}) drop-shadow(0 1px 2px #000)`,
                     }}
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={loc.icon}
-                      alt={`Location ${spot.label}`}
-                      className="h-full w-full object-contain"
-                      draggable={false}
-                      style={{
-                        filter: `drop-shadow(0 0 6px ${loc.color}) drop-shadow(0 1px 2px #000)`,
-                      }}
-                    />
-                  </button>
-                ) : (
-                  <button
-                    key={spot.key}
-                    data-marker
-                    type="button"
-                    title={`Location ${spot.label} - open details`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onEggLocationClick(r.id, loc.index, spot.imageIndex);
-                    }}
-                    className="absolute z-[60] flex items-center justify-center rounded-full font-bold text-white"
-                    style={{
-                      left: `${spot.pos.x}%`,
-                      top: `${spot.pos.y}%`,
-                      width: 34,
-                      height: 34,
-                      fontSize: 15,
-                      border: `3px ${loc.solid ? "solid" : "dashed"} ${loc.color}`,
-                      background: "rgba(9,9,11,0.78)",
-                      boxShadow: `0 0 8px ${loc.color}, 0 1px 3px #000`,
-                      transform: `translate(-50%, -50%) scale(${1 / transform.scale})`,
-                    }}
-                  >
-                    {spot.label}
-                  </button>
-                ),
+                  />
+                </button>
+              ) : (
+                <button
+                  key={spot.key}
+                  data-marker
+                  type="button"
+                  title={`Location ${spot.label} - open details`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onEggLocationClick(spot.routeId, loc.index, spot.imageIndex);
+                  }}
+                  className="absolute z-[60] flex items-center justify-center rounded-full font-bold text-white"
+                  style={{
+                    left: `${spot.pos.x}%`,
+                    top: `${spot.pos.y}%`,
+                    width: 34,
+                    height: 34,
+                    fontSize: 15,
+                    border: `3px ${loc.solid ? "solid" : "dashed"} ${loc.color}`,
+                    background: "rgba(9,9,11,0.78)",
+                    boxShadow: `0 0 8px ${loc.color}, 0 1px 3px #000`,
+                    transform: xf,
+                  }}
+                >
+                  {spot.label}
+                </button>
               );
-            }),
-          )}
+            });
+          })()}
         </div>
 
         {/* Dev coordinate readout */}
         {devCoords && cursor && (
-          <div className="pointer-events-none absolute bottom-2 left-2 rounded bg-black/80 px-2 py-1 font-mono text-xs text-emerald-300">
-            x: {cursor.x}%　y: {cursor.y}%
+          <div className="pointer-events-none absolute bottom-2 left-2 flex items-center gap-2">
+            <div className="rounded bg-black/80 px-2 py-1 font-mono text-xs text-emerald-300">
+              x: {cursor.x}%　y: {cursor.y}%
+            </div>
+            {copiedCoords && (
+              <div className="rounded bg-emerald-600/90 px-2 py-1 font-mono text-xs text-white animate-pulse">
+                Copied {copiedCoords}
+              </div>
+            )}
           </div>
         )}
       </div>
