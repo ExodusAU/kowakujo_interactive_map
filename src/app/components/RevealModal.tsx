@@ -240,7 +240,7 @@ export default function RevealModal({ content, onClose }: RevealModalProps) {
   );
 }
 
-function FormattedDescription({ text }: { text: string }) {
+export function FormattedDescription({ text }: { text: string }) {
   const blocks = text
     .split(/\n{2,}/)
     .map((block) => block.trim())

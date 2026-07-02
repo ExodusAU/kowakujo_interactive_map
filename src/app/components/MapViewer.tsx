@@ -7,6 +7,7 @@ import InteractiveMap, { type MapStageHandle } from "./InteractiveMap";
 import MapSidebar from "./MapSidebar";
 import RevealModal, { type RevealContent } from "./RevealModal";
 import DrawPanel, { type DrawShape } from "./DrawPanel";
+import StoryMode from "./StoryMode";
 
 interface MapViewerProps {
   data: MapData;
@@ -103,6 +104,9 @@ export default function MapViewer({ data }: MapViewerProps) {
   // Easter eggs.
   const [expandedStageId, setExpandedStageId] = useState<string | null>(null);
   const [selectedStepId, setSelectedStepId] = useState<string | null>(null);
+
+  // Story mode: full-screen scrollable instruction sheet.
+  const [storyMode, setStoryMode] = useState(false);
 
   const [highlightMarkerId, setHighlightMarkerId] = useState<string | null>(
     null,
@@ -353,19 +357,29 @@ export default function MapViewer({ data }: MapViewerProps) {
           </button>
         </div>
 
-        {/* Draw toggle */}
-        <button
-          type="button"
-          onClick={() => setDrawMode((v) => !v)}
-          className={`absolute left-4 top-4 flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium shadow-lg backdrop-blur transition-colors ${
-            drawMode
-              ? "border-cyan-400 bg-cyan-500/90 text-black"
-              : "border-white/15 bg-zinc-900/90 text-white hover:bg-white/10"
-          }`}
-          title="Plot a zone or path by clicking the map"
-        >
-          ✏️ {drawMode ? "Drawing… (click map)" : "Draw"}
-        </button>
+        {/* Draw + Story toggles */}
+        <div className="absolute left-4 top-4 flex gap-2">
+          <button
+            type="button"
+            onClick={() => setDrawMode((v) => !v)}
+            className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium shadow-lg backdrop-blur transition-colors ${
+              drawMode
+                ? "border-cyan-400 bg-cyan-500/90 text-black"
+                : "border-white/15 bg-zinc-900/90 text-white hover:bg-white/10"
+            }`}
+            title="Plot a zone or path by clicking the map"
+          >
+            ✏️ {drawMode ? "Drawing… (click map)" : "Draw"}
+          </button>
+          <button
+            type="button"
+            onClick={() => setStoryMode(true)}
+            className="flex items-center gap-2 rounded-lg border border-white/15 bg-zinc-900/90 px-3 py-2 text-sm font-medium text-white shadow-lg backdrop-blur transition-colors hover:bg-white/10"
+            title="Read the full walkthrough as a scrollable guide"
+          >
+            📖 Story
+          </button>
+        </div>
 
         {/* Draw panel */}
         {drawMode && (
@@ -386,6 +400,17 @@ export default function MapViewer({ data }: MapViewerProps) {
             : "Drag to pan · scroll to zoom · click an icon to reveal"}
         </div>
       </div>
+
+      {storyMode && (
+        <StoryMode
+          eggs={data.eggs}
+          onClose={() => setStoryMode(false)}
+          escapeDisabled={reveal !== null}
+          onImageClick={(title, images, startIndex) =>
+            setReveal({ title, images, startIndex })
+          }
+        />
+      )}
 
       <RevealModal content={reveal} onClose={() => setReveal(null)} />
     </div>
